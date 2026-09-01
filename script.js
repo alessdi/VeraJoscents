@@ -81,7 +81,7 @@ function renderCart() {
       <div class="cart-item-frame"><img src="${it.image}" alt=""></div>
       <div class="cart-item-info">
         <p class="cart-item-title">"${it.title}"</p>
-        <p class="cart-item-meta">${it.meta}</p>
+        <p class="cart-item-meta">${it.meta} &middot; Talla ${it.size}</p>
         <div class="cart-item-qty">
           <button class="cart-qty-btn" data-action="dec" aria-label="Quitar una unidad">−</button>
           <span class="cart-qty-num">${it.qty}</span>
@@ -100,13 +100,14 @@ function renderCart() {
 }
 
 function addToCart(data) {
-  const existing = cart.find((it) => it.title === data.title);
+  const existing = cart.find((it) => it.title === data.title && it.size === data.size);
   if (existing) {
     existing.qty += 1;
   } else {
     cart.push({
       title: data.title,
       meta: data.meta,
+      size: data.size,
       price: parseFloat(data.price),
       image: data.image,
       qty: 1,
@@ -170,7 +171,7 @@ document.querySelectorAll('.cart-checkout').forEach((btn) => {
 
     const lineas = cart.map((it, i) => {
       const sub = it.price * it.qty;
-      return `${i + 1}. "${it.title}" (${it.meta.replace(/·.*/, '').trim()}) — Cant. ${it.qty} — ${formatMXN(sub)}`;
+      return `${i + 1}. "${it.title}" (${it.meta.replace(/·.*/, '').trim()}, Talla ${it.size}) — Cant. ${it.qty} — ${formatMXN(sub)}`;
     }).join('\n');
 
     const subtotal = cart.reduce((sum, it) => sum + it.price * it.qty, 0);
@@ -192,18 +193,82 @@ document.querySelectorAll('.cart-checkout').forEach((btn) => {
   });
 });
 
-// --- Botones "Adquirir la pieza" ---
+// --- Botones "Adquirir la pieza" → abren el modal de tallas ---
+const sizeOverlay = document.getElementById('sizeOverlay');
+const sizeModal = document.getElementById('sizeModal');
+const sizeModalTitle = document.getElementById('sizeModalTitle');
+const sizeOptionsEl = document.getElementById('sizeOptions');
+const sizeConfirmBtn = document.getElementById('sizeConfirm');
+const sizeModalCloseBtn = document.getElementById('sizeModalClose');
+const sizeHintEl = document.getElementById('sizeHint');
+
+let pendingItem = null;
+let pendingBtn = null;
+let selectedSize = null;
+
+function openSizeModal(data, btn) {
+  pendingItem = data;
+  pendingBtn = btn;
+  selectedSize = null;
+  sizeModalTitle.textContent = `"${data.title}"`;
+  sizeOptionsEl.querySelectorAll('.size-btn').forEach((b) => b.classList.remove('is-selected'));
+  sizeConfirmBtn.disabled = true;
+  sizeHintEl.textContent = 'Elige una talla para continuar.';
+
+  sizeModal.classList.add('is-open');
+  sizeOverlay.classList.add('is-open');
+  sizeModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('size-modal-open');
+}
+
+function closeSizeModal() {
+  sizeModal.classList.remove('is-open');
+  sizeOverlay.classList.remove('is-open');
+  sizeModal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('size-modal-open');
+  pendingItem = null;
+  pendingBtn = null;
+}
+
+if (sizeOptionsEl) {
+  sizeOptionsEl.querySelectorAll('.size-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      selectedSize = btn.dataset.size;
+      sizeOptionsEl.querySelectorAll('.size-btn').forEach((b) => b.classList.remove('is-selected'));
+      btn.classList.add('is-selected');
+      sizeConfirmBtn.disabled = false;
+      sizeHintEl.textContent = `Talla ${selectedSize} seleccionada.`;
+    });
+  });
+}
+
+if (sizeConfirmBtn) {
+  sizeConfirmBtn.addEventListener('click', () => {
+    if (!selectedSize || !pendingItem) return;
+    addToCart({ ...pendingItem, size: selectedSize });
+    if (pendingBtn) {
+      const original = 'Adquirir la pieza';
+      pendingBtn.textContent = 'Añadida a la colección ✓';
+      setTimeout(() => { pendingBtn.textContent = original; }, 1600);
+    }
+    closeSizeModal();
+  });
+}
+
+if (sizeModalCloseBtn) sizeModalCloseBtn.addEventListener('click', closeSizeModal);
+if (sizeOverlay) sizeOverlay.addEventListener('click', closeSizeModal);
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeSizeModal();
+});
+
 document.querySelectorAll('.placard-cta').forEach((btn) => {
   btn.addEventListener('click', () => {
-    addToCart({
+    openSizeModal({
       title: btn.dataset.title,
       meta: btn.dataset.meta,
       price: btn.dataset.price,
       image: btn.dataset.image,
-    });
-    const original = 'Adquirir la pieza';
-    btn.textContent = 'Añadida a la colección ✓';
-    setTimeout(() => { btn.textContent = original; }, 1600);
+    }, btn);
   });
 });
 

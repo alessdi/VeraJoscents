@@ -6,7 +6,7 @@
 <title>VERA JOSCENTS — Museo de la Perfumería</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,500&family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -46,8 +46,8 @@
 <!-- ================= ROTONDA / HERO ================= -->
 <section class="rotonda" id="rotonda">
   <div class="rotonda-canvas" aria-hidden="true">
-    <video autoplay muted loop playsinline poster="images/fondo-poster.png">
-      <source src="images/fondo.mp4" type="video/mp4">
+    <video autoplay muted loop playsinline poster="images/fondo-movil-poster.png">
+      <source src="images/fondo-movil.mp4" type="video/mp4">
     </video>
   </div>
   <div class="rotonda-vignette"></div>
@@ -88,7 +88,7 @@
 
 <!-- ================= EL CONCEPTO ================= -->
 <section class="concepto" id="concepto">
-  <img src="images/ninfasrio.png" class="concepto-nymph" alt="" aria-hidden="true">
+  <img src="images/ninfasmojadas.png" class="concepto-nymph" alt="" aria-hidden="true">
   <div class="concepto-inner">
     <div class="concepto-text">
       <p class="eyebrow">Cédula curatorial · 01</p>
@@ -445,6 +445,23 @@
     <p class="footer-fine">Vera Joscents © 2025 — Tijuana, México. Boceto de exhibición · Colección 33. Todos los derechos reservados.</p>
   </div>
 </footer>
+
+<!-- ================= SELECCIÓN DE TALLA ================= -->
+<div class="size-overlay" id="sizeOverlay"></div>
+
+<div class="size-modal" id="sizeModal" aria-hidden="true">
+  <button class="size-modal-close" id="sizeModalClose" aria-label="Cerrar">×</button>
+  <p class="eyebrow center">Seleccionar Talla</p>
+  <h3 class="size-modal-title" id="sizeModalTitle">"Título de la pieza"</h3>
+  <div class="size-options" id="sizeOptions">
+    <button class="size-btn" type="button" data-size="S">S</button>
+    <button class="size-btn" type="button" data-size="M">M</button>
+    <button class="size-btn" type="button" data-size="L">L</button>
+    <button class="size-btn" type="button" data-size="XL">XL</button>
+  </div>
+  <p class="size-hint" id="sizeHint">Elige una talla para continuar.</p>
+  <button class="size-confirm" id="sizeConfirm" disabled>Añadir a la Colección</button>
+</div>
 
 <!-- ================= REGISTRO DE ADQUISICIONES (CARRITO) ================= -->
 <div class="cart-overlay" id="cartOverlay"></div>
