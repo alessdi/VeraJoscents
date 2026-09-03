@@ -3,25 +3,37 @@
 // ============================================================
 
 // --- Luz de vela siguiendo el cursor (efecto de sala de museo) ---
-const spotlight = document.getElementById('spotlight');
-if (spotlight && window.matchMedia('(pointer:fine)').matches) {
-  window.addEventListener('mousemove', (e) => {
-    spotlight.style.setProperty('--x', e.clientX + 'px');
-    spotlight.style.setProperty('--y', e.clientY + 'px');
-  });
+try {
+  const spotlight = document.getElementById('spotlight');
+  if (spotlight && window.matchMedia && window.matchMedia('(pointer:fine)').matches) {
+    window.addEventListener('mousemove', (e) => {
+      spotlight.style.setProperty('--x', e.clientX + 'px');
+      spotlight.style.setProperty('--y', e.clientY + 'px');
+    });
+  }
+} catch (e) {
+  console.warn('Spotlight desactivado:', e);
 }
 
 // --- Revelado de obras al hacer scroll ---
-const obras = document.querySelectorAll('.obra');
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in-view');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.15 });
-obras.forEach((obra) => revealObserver.observe(obra));
+try {
+  const obras = document.querySelectorAll('.obra');
+  if (window.IntersectionObserver) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    obras.forEach((obra) => revealObserver.observe(obra));
+  } else {
+    obras.forEach((obra) => obra.classList.add('in-view'));
+  }
+} catch (e) {
+  console.warn('Revelado de obras desactivado:', e);
+}
 
 // --- Girar pieza (frente / dorso) ---
 document.querySelectorAll('.frame-flip').forEach((btn) => {
@@ -100,7 +112,7 @@ function renderCart() {
 }
 
 function addToCart(data) {
-  const existing = cart.find((it) => it.title === data.title && it.size === data.size);
+  const existing = cart.find((it) => it.title === data.title && it.size === data.size && it.meta === data.meta);
   if (existing) {
     existing.qty += 1;
   } else {
@@ -171,7 +183,7 @@ document.querySelectorAll('.cart-checkout').forEach((btn) => {
 
     const lineas = cart.map((it, i) => {
       const sub = it.price * it.qty;
-      return `${i + 1}. "${it.title}" (${it.meta.replace(/·.*/, '').trim()}, Talla ${it.size}) — Cant. ${it.qty} — ${formatMXN(sub)}`;
+      return `${i + 1}. "${it.title}" (${it.meta}, Talla ${it.size}) — Cant. ${it.qty} — ${formatMXN(sub)}`;
     }).join('\n');
 
     const subtotal = cart.reduce((sum, it) => sum + it.price * it.qty, 0);
@@ -261,7 +273,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeSizeModal();
 });
 
-document.querySelectorAll('.placard-cta').forEach((btn) => {
+document.querySelectorAll('.placard-cta:not(#configAddBtn)').forEach((btn) => {
   btn.addEventListener('click', () => {
     openSizeModal({
       title: btn.dataset.title,
@@ -271,5 +283,179 @@ document.querySelectorAll('.placard-cta').forEach((btn) => {
     }, btn);
   });
 });
+
+// ============================================================
+// CONFIGURADOR — "VJ Elemental"
+// ============================================================
+const CONFIG_BASE_PRICE = 1450;
+const CONFIG_UROBOROS_PRICE = 720;
+
+const configMainImg = document.getElementById('configMainImg');
+const configColorName = document.getElementById('configColorName');
+const configColorField = document.getElementById('configColorField');
+const configColorNote = document.getElementById('configColorNote');
+const configSwatchesEl = document.getElementById('configSwatches');
+const configFabricsEl = document.getElementById('configFabrics');
+const configFabricName = document.getElementById('configFabricName');
+const configSizesEl = document.getElementById('configSizes');
+const configUroborosToggle = document.getElementById('configUroborosToggle');
+const configPriceEl = document.getElementById('configPrice');
+const configAddBtn = document.getElementById('configAddBtn');
+
+if (configAddBtn) {
+  const configUroborosVariants = document.getElementById('configUroborosVariants');
+  const configUroborosVariantName = document.getElementById('configUroborosVariantName');
+
+  let configState = {
+    size: null,
+    fabric: 'Negro Clásico',
+    fabricHasEmbroideryChoice: true,
+    frontImage: configMainImg ? configMainImg.getAttribute('src') : '',
+    backImage: 'images/config-uroboros-dorado.jpg',
+    uroborosVariant: 'Dorado',
+    uroborosVariantImage: 'images/config-uroboros-dorado.jpg',
+    color: 'Blanco',
+    uroboros: false,
+  };
+
+  function updateConfigPrice() {
+    const total = CONFIG_BASE_PRICE + (configState.uroboros ? CONFIG_UROBOROS_PRICE : 0);
+    configPriceEl.textContent = formatMXN(total);
+    return total;
+  }
+
+  function updateConfigButton() {
+    if (!configState.size) {
+      configAddBtn.disabled = true;
+      configAddBtn.textContent = 'Elige una talla';
+    } else {
+      configAddBtn.disabled = false;
+      configAddBtn.textContent = 'Añadir a la Colección';
+    }
+  }
+
+  function refreshMainImage() {
+    configMainImg.src = configState.uroboros ? configState.backImage : configState.frontImage;
+  }
+
+  function refreshGalleryForFabric() {
+    document.querySelectorAll('#configGalleryRow img').forEach((img) => {
+      img.classList.toggle('is-hidden', img.dataset.fabric !== configState.fabric);
+    });
+  }
+
+  function refreshUroborosVariantsVisibility() {
+    const show = configState.uroboros && configState.fabricHasEmbroideryChoice;
+    configUroborosVariants.classList.toggle('is-visible', show);
+  }
+
+  configFabricsEl.querySelectorAll('.fabric-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      configFabricsEl.querySelectorAll('.fabric-btn').forEach((b) => b.classList.remove('is-selected'));
+      btn.classList.add('is-selected');
+
+      configState.fabric = btn.dataset.fabric;
+      configState.fabricHasEmbroideryChoice = btn.dataset.embroidery === 'true';
+      configFabricName.textContent = btn.dataset.fabric;
+
+      if (configState.fabricHasEmbroideryChoice) {
+        // usa la muestra de color actualmente seleccionada
+        const activeSwatch = configSwatchesEl.querySelector('.swatch.is-selected');
+        configState.frontImage = activeSwatch ? activeSwatch.dataset.image : btn.dataset.image;
+        configState.backImage = configState.uroborosVariantImage;
+        configSwatchesEl.classList.remove('is-disabled');
+        configColorNote.classList.remove('is-visible');
+      } else {
+        configState.frontImage = btn.dataset.image;
+        configState.backImage = btn.dataset.back;
+        configSwatchesEl.classList.add('is-disabled');
+        configColorNote.classList.add('is-visible');
+      }
+
+      refreshUroborosVariantsVisibility();
+      refreshGalleryForFabric();
+      refreshMainImage();
+    });
+  });
+
+  configUroborosVariants.querySelectorAll('.fabric-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      configUroborosVariants.querySelectorAll('.fabric-btn').forEach((b) => b.classList.remove('is-selected'));
+      btn.classList.add('is-selected');
+      configState.uroborosVariant = btn.dataset.variant;
+      configState.uroborosVariantImage = btn.dataset.image;
+      configState.backImage = btn.dataset.image;
+      configUroborosVariantName.textContent = btn.dataset.variant;
+      refreshMainImage();
+    });
+  });
+
+  configSwatchesEl.querySelectorAll('.swatch').forEach((sw) => {
+    sw.addEventListener('click', () => {
+      if (!configState.fabricHasEmbroideryChoice) return;
+      configSwatchesEl.querySelectorAll('.swatch').forEach((s) => s.classList.remove('is-selected'));
+      sw.classList.add('is-selected');
+      configState.color = sw.dataset.color;
+      configState.frontImage = sw.dataset.image;
+      configColorName.textContent = sw.dataset.color;
+      refreshMainImage();
+    });
+  });
+
+  configSizesEl.querySelectorAll('.size-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      configSizesEl.querySelectorAll('.size-btn').forEach((b) => b.classList.remove('is-selected'));
+      btn.classList.add('is-selected');
+      configState.size = btn.dataset.size;
+      updateConfigButton();
+    });
+  });
+
+  configUroborosToggle.addEventListener('change', () => {
+    configState.uroboros = configUroborosToggle.checked;
+    updateConfigPrice();
+    refreshUroborosVariantsVisibility();
+    refreshMainImage();
+  });
+
+  document.querySelectorAll('.config-gallery-row img').forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      configMainImg.src = thumb.getAttribute('src');
+    });
+  });
+
+  const configGalleryToggle = document.getElementById('configGalleryToggle');
+  const configGalleryBody = document.getElementById('configGalleryBody');
+  if (configGalleryToggle) {
+    configGalleryToggle.addEventListener('click', () => {
+      const isOpen = configGalleryBody.classList.toggle('is-open');
+      configGalleryToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+
+  configAddBtn.addEventListener('click', () => {
+    if (!configState.size) return;
+    const total = updateConfigPrice();
+    const colorPart = configState.fabricHasEmbroideryChoice
+      ? ` · Color de bordado: ${configState.color}`
+      : '';
+    const uroborosPart = configState.uroboros
+      ? (configState.fabricHasEmbroideryChoice ? ` · Uróboros (${configState.uroborosVariant})` : ' · Con Uróboros')
+      : '';
+    addToCart({
+      title: 'VJ Elemental',
+      meta: `Camiseta Oversized · Tela: ${configState.fabric}${colorPart}${uroborosPart}`,
+      price: String(total),
+      image: configState.uroboros ? configState.backImage : configState.frontImage,
+      size: configState.size,
+    });
+    configAddBtn.textContent = 'Añadida a la colección ✓';
+    setTimeout(updateConfigButton, 1600);
+  });
+
+  updateConfigPrice();
+  updateConfigButton();
+  refreshGalleryForFabric();
+}
 
 renderCart();
