@@ -112,6 +112,37 @@ a{ color:inherit; text-decoration:none; }
 }
 .nav-links a:hover{ color:var(--gold-light); }
 .nav-links a:hover::after{ width:100%; }
+.nav-links a.is-active{ color:var(--gold-light); }
+.nav-links a.is-active::after{ width:100%; }
+
+/* ============================================================
+   NAVEGACIÓN POR PESTAÑAS (SPA)
+   ============================================================ */
+.tab-panel{ display:none; }
+.tab-panel.is-active{ display:block; animation:tabFadeIn .45s ease; }
+@keyframes tabFadeIn{
+  from{ opacity:0; transform:translateY(10px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+@media (prefers-reduced-motion: reduce){
+  .tab-panel.is-active{ animation:none; }
+}
+
+.sala-card{ cursor:pointer; }
+
+.obra-gallery{ margin:0 0 1.3rem; }
+.obra-gallery .config-gallery-toggle{ font-size:.6rem; padding:.7rem .9rem; }
+
+/* fotos "limpias" que ya traen marco y fondo renderizados — sin marco CSS encima */
+.obra-wall-clean{
+  position:relative; overflow:hidden;
+  background:var(--wall-alt);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.75);
+}
+.obra-wall-clean img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
 
 .nav-right{ display:flex; align-items:center; gap:1.4rem; }
 .nav-social{ display:flex; align-items:center; gap:1rem; }
@@ -384,8 +415,8 @@ a{ color:inherit; text-decoration:none; }
   margin:0 0 3.6rem;
 }
 .salas-grid{
-  max-width:1200px; margin:0 auto;
-  display:grid; grid-template-columns:repeat(4,1fr);
+  max-width:1400px; margin:0 auto;
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
   gap:1.5px;
   background:rgba(176,137,58,.25);
   border:1px solid rgba(176,137,58,.25);
@@ -586,7 +617,6 @@ a{ color:inherit; text-decoration:none; }
    ============================================================ */
 @media (max-width: 980px){
   .concepto-inner{ grid-template-columns:1fr; gap:3.5rem; }
-  .salas-grid{ grid-template-columns:repeat(2,1fr); }
   .obras-grid{ grid-template-columns:1fr; gap:4rem; }
   .visitas-inner{ grid-template-columns:1fr; gap:2.5rem; }
   .nav-links{ display:none; }

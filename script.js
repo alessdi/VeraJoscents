@@ -35,6 +35,53 @@ try {
   console.warn('Revelado de obras desactivado:', e);
 }
 
+// ============================================================
+// NAVEGACIÓN POR PESTAÑAS (SPA)
+// ============================================================
+(function () {
+  const panels = document.querySelectorAll('.tab-panel');
+  const navLinks = document.querySelectorAll('[data-tab]');
+  const validTabs = Array.from(panels).map((p) => p.dataset.tabPanel);
+
+  function showTab(tabName, { scroll = true } = {}) {
+    if (!validTabs.includes(tabName)) tabName = 'inicio';
+
+    panels.forEach((panel) => {
+      panel.classList.toggle('is-active', panel.dataset.tabPanel === tabName);
+    });
+    navLinks.forEach((link) => {
+      if (link.dataset.tab) {
+        link.classList.toggle('is-active', link.dataset.tab === tabName);
+      }
+    });
+
+    if (history.replaceState) {
+      history.replaceState(null, '', '#' + tabName);
+    } else {
+      location.hash = tabName;
+    }
+
+    if (scroll) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      showTab(link.dataset.tab);
+    });
+  });
+
+  window.addEventListener('popstate', () => {
+    const initial = location.hash.replace('#', '') || 'inicio';
+    showTab(initial, { scroll: false });
+  });
+
+  const initialTab = location.hash.replace('#', '');
+  showTab(initialTab || 'inicio', { scroll: false });
+})();
+
 // --- Girar pieza (frente / dorso) ---
 document.querySelectorAll('.frame-flip').forEach((btn) => {
   btn.addEventListener('click', () => {
@@ -273,7 +320,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeSizeModal();
 });
 
-document.querySelectorAll('.placard-cta:not(#configAddBtn)').forEach((btn) => {
+document.querySelectorAll('.placard-cta:not(#configAddBtn):not(#premiumAddBtn)').forEach((btn) => {
   btn.addEventListener('click', () => {
     openSizeModal({
       title: btn.dataset.title,
@@ -282,6 +329,37 @@ document.querySelectorAll('.placard-cta:not(#configAddBtn)').forEach((btn) => {
       image: btn.dataset.image,
     }, btn);
   });
+});
+
+// ============================================================
+// GALERÍAS "FOTOGRAFÍAS REALES" — genérico (configurador, premium y piezas)
+// ============================================================
+document.addEventListener('click', (e) => {
+  const toggle = e.target.closest('.config-gallery-toggle');
+  if (!toggle) return;
+  const body = toggle.nextElementSibling;
+  if (!body || !body.classList.contains('config-gallery-body')) return;
+  const isOpen = body.classList.toggle('is-open');
+  toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+});
+
+document.addEventListener('click', (e) => {
+  const thumb = e.target.closest('.config-gallery-row img');
+  if (!thumb) return;
+
+  // Caso especial: variantes de color del Premium también deben actualizar la base seleccionada
+  if (thumb.closest('#premiumGalleryRow') && thumb.dataset.fabric) {
+    const targetBtn = document.querySelector(`#premiumFabrics .fabric-btn[data-fabric="${thumb.dataset.fabric}"]`);
+    if (targetBtn) {
+      targetBtn.click();
+      return;
+    }
+  }
+
+  const scope = thumb.closest('.obra, .config-visual');
+  if (!scope) return;
+  const mainImg = scope.querySelector('.gallery-main-img');
+  if (mainImg) mainImg.src = thumb.getAttribute('src');
 });
 
 // ============================================================
@@ -418,21 +496,6 @@ if (configAddBtn) {
     refreshMainImage();
   });
 
-  document.querySelectorAll('.config-gallery-row img').forEach((thumb) => {
-    thumb.addEventListener('click', () => {
-      configMainImg.src = thumb.getAttribute('src');
-    });
-  });
-
-  const configGalleryToggle = document.getElementById('configGalleryToggle');
-  const configGalleryBody = document.getElementById('configGalleryBody');
-  if (configGalleryToggle) {
-    configGalleryToggle.addEventListener('click', () => {
-      const isOpen = configGalleryBody.classList.toggle('is-open');
-      configGalleryToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-  }
-
   configAddBtn.addEventListener('click', () => {
     if (!configState.size) return;
     const total = updateConfigPrice();
@@ -456,6 +519,178 @@ if (configAddBtn) {
   updateConfigPrice();
   updateConfigButton();
   refreshGalleryForFabric();
+}
+
+// ============================================================
+// CONFIGURADOR — "VJ Elemental Premium"
+// ============================================================
+const PREMIUM_BASE_PRICE = {
+  'Black French Terry': 2450,
+  'Grey Sunfade': 2800,
+  'Red Sunfade': 2800,
+  'Blue Sunfade': 2800,
+  'Olive Sunfade': 2800,
+};
+const PREMIUM_UROBOROS_SURCHARGE = {
+  'Black French Terry': 650,
+  'Grey Sunfade': 700,
+  'Red Sunfade': 700,
+  'Blue Sunfade': 700,
+  'Olive Sunfade': 700,
+};
+const PREMIUM_PALETTES = {
+  full: [
+    { name: 'Blanco', hex: '#f2efe6' },
+    { name: 'Rojo', hex: '#8c1c22' },
+    { name: 'Azul', hex: '#1c2a4d' },
+    { name: 'Turquesa', hex: '#2fa9a1' },
+    { name: 'Verde', hex: '#3c7a4e' },
+    { name: 'Fuchsia', hex: '#d6708f' },
+    { name: 'Morado', hex: '#8f7bc7' },
+    { name: 'Dorado', hex: '#b9954a' },
+    { name: 'Negro', hex: '#111111' },
+    { name: 'Plateado metálico', hex: '#c7cad1' },
+    { name: 'Dorado metálico', hex: '#c9a227' },
+  ],
+  red: [
+    { name: 'Triple Red (tono sobre tono)', hex: '#8c1c22' },
+    { name: 'Negro', hex: '#111111' },
+    { name: 'Fuchsia', hex: '#d6708f' },
+    { name: 'Plateado metálico', hex: '#c7cad1' },
+    { name: 'Dorado metálico', hex: '#c9a227' },
+  ],
+  olive: [
+    { name: 'Triple Olive (tono sobre tono)', hex: '#6b6f4a' },
+    { name: 'Negro', hex: '#111111' },
+    { name: 'Fuchsia', hex: '#d6708f' },
+    { name: 'Plateado metálico', hex: '#c7cad1' },
+    { name: 'Dorado metálico', hex: '#c9a227' },
+    { name: 'Morado', hex: '#8f7bc7' },
+  ],
+};
+
+const premiumMainImg = document.getElementById('premiumMainImg');
+const premiumFabricsEl = document.getElementById('premiumFabrics');
+const premiumFabricName = document.getElementById('premiumFabricName');
+const premiumSwatchesEl = document.getElementById('premiumSwatches');
+const premiumColorName = document.getElementById('premiumColorName');
+const premiumSizesEl = document.getElementById('premiumSizes');
+const premiumUroborosToggle = document.getElementById('premiumUroborosToggle');
+const premiumUroborosPriceEl = document.getElementById('premiumUroborosPrice');
+const premiumPriceEl = document.getElementById('premiumPrice');
+const premiumAddBtn = document.getElementById('premiumAddBtn');
+
+if (premiumAddBtn) {
+  let premiumState = {
+    size: null,
+    fabric: 'Black French Terry',
+    palette: 'full',
+    color: null,
+    uroboros: false,
+    image: premiumMainImg ? premiumMainImg.getAttribute('src') : '',
+  };
+
+  function renderPremiumSwatches() {
+    const options = PREMIUM_PALETTES[premiumState.palette];
+    premiumSwatchesEl.innerHTML = options.map((c, i) => `
+      <button class="swatch${i === 0 ? ' is-selected' : ''}" type="button" data-color="${c.name}" style="--sw:${c.hex}" aria-label="${c.name}"></button>
+    `).join('');
+    premiumState.color = options[0].name;
+    premiumColorName.textContent = options[0].name;
+
+    premiumSwatchesEl.querySelectorAll('.swatch').forEach((sw) => {
+      sw.addEventListener('click', () => {
+        premiumSwatchesEl.querySelectorAll('.swatch').forEach((s) => s.classList.remove('is-selected'));
+        sw.classList.add('is-selected');
+        premiumState.color = sw.dataset.color;
+        premiumColorName.textContent = sw.dataset.color;
+      });
+    });
+  }
+
+  function updatePremiumPrice() {
+    const base = PREMIUM_BASE_PRICE[premiumState.fabric];
+    const surcharge = premiumState.uroboros ? PREMIUM_UROBOROS_SURCHARGE[premiumState.fabric] : 0;
+    const total = base + surcharge;
+    premiumPriceEl.textContent = formatMXN(total);
+    premiumUroborosPriceEl.textContent = `(+${formatMXN(PREMIUM_UROBOROS_SURCHARGE[premiumState.fabric])} MXN)`;
+    return total;
+  }
+
+  function updatePremiumButton() {
+    if (!premiumState.size) {
+      premiumAddBtn.disabled = true;
+      premiumAddBtn.textContent = 'Elige una talla';
+    } else {
+      premiumAddBtn.disabled = false;
+      premiumAddBtn.textContent = 'Añadir a la Colección';
+    }
+  }
+
+  premiumFabricsEl.querySelectorAll('.fabric-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      premiumFabricsEl.querySelectorAll('.fabric-btn').forEach((b) => b.classList.remove('is-selected'));
+      btn.classList.add('is-selected');
+      premiumState.fabric = btn.dataset.fabric;
+      premiumState.palette = btn.dataset.palette;
+      premiumFabricName.textContent = btn.dataset.fabric;
+      premiumState.image = btn.dataset.image;
+      premiumMainImg.src = btn.dataset.image;
+      renderPremiumSwatches();
+      updatePremiumPrice();
+    });
+  });
+
+  premiumSizesEl.querySelectorAll('.size-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      premiumSizesEl.querySelectorAll('.size-btn').forEach((b) => b.classList.remove('is-selected'));
+      btn.classList.add('is-selected');
+      premiumState.size = btn.dataset.size;
+      updatePremiumButton();
+    });
+  });
+
+  premiumUroborosToggle.addEventListener('change', () => {
+    premiumState.uroboros = premiumUroborosToggle.checked;
+    updatePremiumPrice();
+  });
+
+  premiumAddBtn.addEventListener('click', () => {
+    if (!premiumState.size) return;
+    const total = updatePremiumPrice();
+    const uroborosPart = premiumState.uroboros ? ' · Con Ouroboros en espalda' : '';
+    addToCart({
+      title: 'VJ Elemental Premium',
+      meta: `Hoodie French Terry 450gsm · Base: ${premiumState.fabric} · Color de bordado: ${premiumState.color}${uroborosPart}`,
+      price: String(total),
+      image: premiumState.image,
+      size: premiumState.size,
+    });
+    premiumAddBtn.textContent = 'Añadida a la colección ✓';
+    setTimeout(updatePremiumButton, 1600);
+  });
+
+  renderPremiumSwatches();
+  updatePremiumPrice();
+  updatePremiumButton();
+}
+
+// ============================================================
+// VARIANTES — "VJ Escudo Heráldico"
+// ============================================================
+const escudoVariantsEl = document.getElementById('escudoVariants');
+const escudoMainImg = document.getElementById('escudoMainImg');
+const escudoVariantName = document.getElementById('escudoVariantName');
+
+if (escudoVariantsEl && escudoMainImg) {
+  escudoVariantsEl.querySelectorAll('.fabric-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      escudoVariantsEl.querySelectorAll('.fabric-btn').forEach((b) => b.classList.remove('is-selected'));
+      btn.classList.add('is-selected');
+      escudoMainImg.src = btn.dataset.image;
+      if (escudoVariantName) escudoVariantName.textContent = btn.dataset.name;
+    });
+  });
 }
 
 renderCart();
