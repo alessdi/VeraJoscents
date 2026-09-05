@@ -43,7 +43,7 @@ try {
   const navLinks = document.querySelectorAll('[data-tab]');
   const validTabs = Array.from(panels).map((p) => p.dataset.tabPanel);
 
-  function showTab(tabName, { scroll = true } = {}) {
+  function showTab(tabName, { scroll = true, pushHistory = true } = {}) {
     if (!validTabs.includes(tabName)) tabName = 'inicio';
 
     panels.forEach((panel) => {
@@ -55,10 +55,12 @@ try {
       }
     });
 
-    if (history.replaceState) {
-      history.replaceState(null, '', '#' + tabName);
-    } else {
-      location.hash = tabName;
+    if (pushHistory) {
+      if (history.pushState) {
+        history.pushState(null, '', '#' + tabName);
+      } else {
+        location.hash = tabName;
+      }
     }
 
     if (scroll) {
@@ -75,11 +77,11 @@ try {
 
   window.addEventListener('popstate', () => {
     const initial = location.hash.replace('#', '') || 'inicio';
-    showTab(initial, { scroll: false });
+    showTab(initial, { scroll: false, pushHistory: false });
   });
 
   const initialTab = location.hash.replace('#', '');
-  showTab(initialTab || 'inicio', { scroll: false });
+  showTab(initialTab || 'inicio', { scroll: false, pushHistory: false });
 })();
 
 // --- Girar pieza (frente / dorso) ---
@@ -346,15 +348,6 @@ document.addEventListener('click', (e) => {
 document.addEventListener('click', (e) => {
   const thumb = e.target.closest('.config-gallery-row img');
   if (!thumb) return;
-
-  // Caso especial: variantes de color del Premium también deben actualizar la base seleccionada
-  if (thumb.closest('#premiumGalleryRow') && thumb.dataset.fabric) {
-    const targetBtn = document.querySelector(`#premiumFabrics .fabric-btn[data-fabric="${thumb.dataset.fabric}"]`);
-    if (targetBtn) {
-      targetBtn.click();
-      return;
-    }
-  }
 
   const scope = thumb.closest('.obra, .config-visual');
   if (!scope) return;
@@ -627,6 +620,20 @@ if (premiumAddBtn) {
     }
   }
 
+  function refreshPremiumGallery(fabric) {
+    const row = document.getElementById('premiumGalleryRow');
+    if (!row) return;
+    const imgs = row.querySelectorAll('img');
+    let anyVisible = false;
+    imgs.forEach((img) => {
+      const match = img.dataset.fabric === fabric;
+      img.classList.toggle('is-hidden', !match);
+      if (match) anyVisible = true;
+    });
+    const note = document.getElementById('premiumGalleryEmptyNote');
+    if (note) note.style.display = anyVisible ? 'none' : 'block';
+  }
+
   premiumFabricsEl.querySelectorAll('.fabric-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       premiumFabricsEl.querySelectorAll('.fabric-btn').forEach((b) => b.classList.remove('is-selected'));
@@ -638,8 +645,11 @@ if (premiumAddBtn) {
       premiumMainImg.src = btn.dataset.image;
       renderPremiumSwatches();
       updatePremiumPrice();
+      refreshPremiumGallery(btn.dataset.fabric);
     });
   });
+
+  refreshPremiumGallery('Black French Terry');
 
   premiumSizesEl.querySelectorAll('.size-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -689,6 +699,85 @@ if (escudoVariantsEl && escudoMainImg) {
       btn.classList.add('is-selected');
       escudoMainImg.src = btn.dataset.image;
       if (escudoVariantName) escudoVariantName.textContent = btn.dataset.name;
+    });
+  });
+}
+
+// ============================================================
+// VARIANTES — "El Sello Rojo" (camiseta, pecho)
+// ============================================================
+const selloRojoVariantsEl = document.getElementById('selloRojoVariants');
+const selloRojoMainImg = document.getElementById('selloRojoMainImg');
+const selloRojoVariantName = document.getElementById('selloRojoVariantName');
+const selloRojoGalleryRow = document.getElementById('selloRojoGalleryRow');
+const selloRojoAddBtn = document.getElementById('selloRojoAddBtn');
+
+if (selloRojoVariantsEl) {
+  function refreshSelloRojoGallery(variant) {
+    selloRojoGalleryRow.querySelectorAll('img').forEach((img) => {
+      img.classList.toggle('is-hidden', img.dataset.variant !== variant);
+    });
+  }
+
+  selloRojoVariantsEl.querySelectorAll('.fabric-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      selloRojoVariantsEl.querySelectorAll('.fabric-btn').forEach((b) => b.classList.remove('is-selected'));
+      btn.classList.add('is-selected');
+      selloRojoMainImg.src = btn.dataset.image;
+      selloRojoVariantName.textContent = btn.dataset.name;
+      selloRojoAddBtn.dataset.title = 'El Sello Íntimo (' + btn.dataset.name + ')';
+      selloRojoAddBtn.dataset.image = btn.dataset.image;
+      refreshSelloRojoGallery(btn.dataset.name);
+    });
+  });
+}
+
+// ============================================================
+// VARIANTES — "El Sello" (hoodie, espalda)
+// ============================================================
+const selloHoodieVariantsEl = document.getElementById('selloHoodieVariants');
+const selloHoodieMainImg = document.getElementById('selloHoodieMainImg');
+const selloHoodieVariantName = document.getElementById('selloHoodieVariantName');
+const selloHoodieGalleryRow = document.getElementById('selloHoodieGalleryRow');
+const selloHoodiePrice = document.getElementById('selloHoodiePrice');
+const selloHoodieAddBtn = document.getElementById('selloHoodieAddBtn');
+
+if (selloHoodieVariantsEl) {
+  function refreshSelloHoodieGallery(variant) {
+    selloHoodieGalleryRow.querySelectorAll('img').forEach((img) => {
+      img.classList.toggle('is-hidden', img.dataset.variant !== variant);
+    });
+  }
+
+  selloHoodieVariantsEl.querySelectorAll('.fabric-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      selloHoodieVariantsEl.querySelectorAll('.fabric-btn').forEach((b) => b.classList.remove('is-selected'));
+      btn.classList.add('is-selected');
+      selloHoodieMainImg.src = btn.dataset.image;
+      selloHoodieVariantName.textContent = btn.dataset.name;
+      const price = btn.dataset.price;
+      selloHoodiePrice.textContent = formatMXN(parseInt(price, 10));
+      selloHoodieAddBtn.dataset.title = 'El Sello (' + btn.dataset.name + ')';
+      selloHoodieAddBtn.dataset.price = price;
+      selloHoodieAddBtn.dataset.image = btn.dataset.image;
+      refreshSelloHoodieGallery(btn.dataset.name);
+    });
+  });
+}
+
+// ============================================================
+// Escudo Heráldico de Dragones — filtrar fotos reales por color
+// ============================================================
+const dragonesVariantsRow = document.getElementById('dragonesVariantsRow');
+const dragonesRealGalleryRow = document.getElementById('dragonesRealGalleryRow');
+
+if (dragonesVariantsRow && dragonesRealGalleryRow) {
+  dragonesVariantsRow.querySelectorAll('img').forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      const variant = thumb.dataset.variant;
+      dragonesRealGalleryRow.querySelectorAll('img').forEach((img) => {
+        img.classList.toggle('is-hidden', img.dataset.variant !== variant);
+      });
     });
   });
 }

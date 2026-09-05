@@ -222,12 +222,24 @@
 
     <article class="obra" data-price="1850">
       <div class="obra-wall-clean">
-        <img src="images/crest-clean/sello-rojo-tee.jpg" alt="El Sello Rojo, Ouroboros Crest bordado" class="gallery-main-img">
+        <img id="selloRojoMainImg" src="images/crest-clean/sello-rojo-tee.jpg" alt="El Sello Íntimo, camiseta negra, bordado al pecho" class="gallery-main-img">
       </div>
       <div class="placard">
-        <p class="placard-title">"El Sello Rojo"</p>
+        <p class="placard-title">"El Sello Íntimo"</p>
         <p class="placard-meta">Camiseta · Algodón pesado 260gsm</p>
-        <p class="placard-desc">El Ouroboros se cierra en hilo carmesí sobre algodón negro — el ciclo que se devora y renace teñido del color de la ofrenda.</p>
+        <p class="placard-desc">
+          El Ouroboros bordado al pecho — la misma guardia, en formato íntimo. El bordado puede
+          colocarse del lado del pecho o centrado en medio, según la variante elegida.
+        </p>
+
+        <div class="config-field">
+          <span class="config-field-label">Variantes — <em id="selloRojoVariantName">Rojo</em></span>
+          <div class="config-fabrics" id="selloRojoVariants">
+            <button class="fabric-btn is-selected" type="button" data-name="Rojo" data-image="images/crest-clean/sello-rojo-tee.jpg">Rojo</button>
+            <button class="fabric-btn" type="button" data-name="Bicolor" data-image="images/crest-clean/sello-bicolor-tee.jpg">Bicolor</button>
+            <button class="fabric-btn" type="button" data-name="Tono sobre tono" data-image="images/crest-clean/sello-tono-tee.jpg">Tono sobre tono</button>
+          </div>
+        </div>
 
         <div class="obra-gallery">
           <button class="config-gallery-toggle" type="button" aria-expanded="false">
@@ -235,18 +247,16 @@
             <span class="config-gallery-arrow">▾</span>
           </button>
           <div class="config-gallery-body">
-            <div class="config-gallery-row">
-          <img src="images/crest/sello-rojo-1.jpg" alt="Fotografía real — El Sello Rojo, detalle 1">
-          <img src="images/crest/sello-rojo-2.jpg" alt="Fotografía real — El Sello Rojo, detalle 2">
-          <img src="images/crest/sello-rojo-3.jpg" alt="Fotografía real — El Sello Rojo, detalle 3">
-          <img src="images/crest/sello-rojo-4.jpg" alt="Fotografía real — El Sello Rojo, detalle 4">
-          <img src="images/crest/sello-rojo-5.jpg" alt="Fotografía real — El Sello Rojo, detalle 5">
-          <img src="images/crest/sello-rojo-6.jpg" alt="Fotografía real — El Sello Rojo, detalle 6">
-          <img src="images/crest/sello-rojo-7.jpg" alt="Fotografía real — El Sello Rojo, detalle 7">
-          <img src="images/crest/sello-rojo-8.jpg" alt="Fotografía real — El Sello Rojo, detalle 8">
-          <img src="images/crest/sello-rojo-9.jpg" alt="Fotografía real — El Sello Rojo, detalle 9">
-          <img src="images/crest/sello-rojo-10.jpg" alt="Fotografía real — El Sello Rojo, detalle 10">
-          <img src="images/crest/sello-rojo-11.jpg" alt="Fotografía real — El Sello Rojo, detalle 11">
+            <div class="config-gallery-row" id="selloRojoGalleryRow">
+              <img src="images/crest/sello-rojo-2.jpg" data-variant="Rojo" alt="Fotografía real — El Sello Íntimo, Rojo, detalle 2">
+              <img src="images/crest/sello-rojo-3.jpg" data-variant="Rojo" alt="Fotografía real — El Sello Íntimo, Rojo, detalle 3">
+              <img src="images/crest/sello-rojo-4.jpg" data-variant="Rojo" alt="Fotografía real — El Sello Íntimo, Rojo, detalle 4">
+              <img src="images/crest/sello-rojo-5.jpg" data-variant="Rojo" alt="Fotografía real — El Sello Íntimo, Rojo, detalle 5">
+              <img src="images/crest/sello-rojo-7.jpg" data-variant="Rojo" alt="Fotografía real — El Sello Íntimo, Rojo, detalle 7">
+              <img src="images/crest/sello-rojo-10.jpg" data-variant="Rojo" alt="Fotografía real — El Sello Íntimo, Rojo, detalle 10">
+              <img src="images/crest/sello-bicolor-tee-1.jpg" data-variant="Bicolor" class="is-hidden" alt="Fotografía real — El Sello Íntimo, Bicolor, detalle 1">
+              <img src="images/crest/sello-bicolor-tee-2.jpg" data-variant="Bicolor" class="is-hidden" alt="Fotografía real — El Sello Íntimo, Bicolor, detalle 2">
+              <img src="images/crest/sello-bicolor-tee-3.jpg" data-variant="Bicolor" class="is-hidden" alt="Fotografía real — El Sello Íntimo, Bicolor, detalle 3">
             </div>
           </div>
         </div>
@@ -255,80 +265,10 @@
           <span class="placard-ed">Ed. 33 · MX</span>
           <span class="placard-price">$1,850 MXN</span>
         </div>
-        <button class="placard-cta" data-title="El Sello Rojo" data-meta="Camiseta · Algodón pesado 260gsm" data-price="1850" data-image="images/crest-clean/sello-rojo-tee.jpg">Adquirir la pieza</button>
+        <button class="placard-cta" id="selloRojoAddBtn" data-title="El Sello Íntimo" data-meta="Camiseta · Algodón pesado 260gsm" data-price="1850" data-image="images/crest-clean/sello-rojo-tee.jpg">Adquirir la pieza</button>
       </div>
     </article>
-    <article class="obra" data-price="1850">
-      <div class="obra-wall-clean">
-        <img src="images/crest-clean/sello-plateado-tee.jpg" alt="El Sello Plateado, Ouroboros Crest bordado" class="gallery-main-img">
-      </div>
-      <div class="placard">
-        <p class="placard-title">"El Sello Plateado"</p>
-        <p class="placard-meta">Camiseta · Algodón pesado 260gsm</p>
-        <p class="placard-desc">Cromado sobre negro: la serpiente y el monograma VJ tallados en plata, fríos y precisos como un espejo antiguo.</p>
 
-        <div class="obra-gallery">
-          <button class="config-gallery-toggle" type="button" aria-expanded="false">
-            <span>Fotografías reales de la confección</span>
-            <span class="config-gallery-arrow">▾</span>
-          </button>
-          <div class="config-gallery-body">
-            <div class="config-gallery-row">
-          <img src="images/crest/sello-plateado-1.jpg" alt="Fotografía real — El Sello Plateado, detalle 1">
-          <img src="images/crest/sello-plateado-2.jpg" alt="Fotografía real — El Sello Plateado, detalle 2">
-          <img src="images/crest/sello-plateado-3.jpg" alt="Fotografía real — El Sello Plateado, detalle 3">
-          <img src="images/crest/sello-plateado-4.jpg" alt="Fotografía real — El Sello Plateado, detalle 4">
-          <img src="images/crest/sello-plateado-5.jpg" alt="Fotografía real — El Sello Plateado, detalle 5">
-          <img src="images/crest/sello-plateado-6.jpg" alt="Fotografía real — El Sello Plateado, detalle 6">
-          <img src="images/crest/sello-plateado-7.jpg" alt="Fotografía real — El Sello Plateado, detalle 7">
-            </div>
-          </div>
-        </div>
-
-        <div class="placard-row">
-          <span class="placard-ed">Ed. 33 · MX</span>
-          <span class="placard-price">$1,850 MXN</span>
-        </div>
-        <button class="placard-cta" data-title="El Sello Plateado" data-meta="Camiseta · Algodón pesado 260gsm" data-price="1850" data-image="images/crest-clean/sello-plateado-tee.jpg">Adquirir la pieza</button>
-      </div>
-    </article>
-    <article class="obra" data-price="1850">
-      <div class="obra-wall-clean">
-        <img src="images/crest-clean/sello-dorado-tee.jpg" alt="El Sello Dorado, Ouroboros Crest bordado" class="gallery-main-img">
-      </div>
-      <div class="placard">
-        <p class="placard-title">"El Sello Dorado"</p>
-        <p class="placard-meta">Camiseta · Algodón pesado 260gsm</p>
-        <p class="placard-desc">Hilo dorado metálico trazando el círculo eterno sobre algodón negro — la versión más solemne del guardián.</p>
-
-        <div class="obra-gallery">
-          <button class="config-gallery-toggle" type="button" aria-expanded="false">
-            <span>Fotografías reales de la confección</span>
-            <span class="config-gallery-arrow">▾</span>
-          </button>
-          <div class="config-gallery-body">
-            <div class="config-gallery-row">
-          <img src="images/crest/sello-dorado-1.jpg" alt="Fotografía real — El Sello Dorado, detalle 1">
-          <img src="images/crest/sello-dorado-2.jpg" alt="Fotografía real — El Sello Dorado, detalle 2">
-          <img src="images/crest/sello-dorado-3.jpg" alt="Fotografía real — El Sello Dorado, detalle 3">
-          <img src="images/crest/sello-dorado-4.jpg" alt="Fotografía real — El Sello Dorado, detalle 4">
-          <img src="images/crest/sello-dorado-5.jpg" alt="Fotografía real — El Sello Dorado, detalle 5">
-          <img src="images/crest/sello-dorado-6.jpg" alt="Fotografía real — El Sello Dorado, detalle 6">
-          <img src="images/crest/sello-dorado-7.jpg" alt="Fotografía real — El Sello Dorado, detalle 7">
-          <img src="images/crest/sello-dorado-8.jpg" alt="Fotografía real — El Sello Dorado, detalle 8">
-          <img src="images/crest/sello-dorado-9.jpg" alt="Fotografía real — El Sello Dorado, detalle 9">
-          <img src="images/crest/sello-dorado-10.jpg" alt="Fotografía real — El Sello Dorado, detalle 10">
-            </div>
-          </div>
-        </div>
-
-        <div class="placard-row">
-          <span class="placard-ed">Ed. 33 · MX</span>
-          <span class="placard-price">$1,850 MXN</span>
-        </div>
-        <button class="placard-cta" data-title="El Sello Dorado" data-meta="Camiseta · Algodón pesado 260gsm" data-price="1850" data-image="images/crest-clean/sello-dorado-tee.jpg">Adquirir la pieza</button>
-      </div>
-    </article>
   
     <article class="obra" data-price="1850">
       <div class="obra-wall-clean">
@@ -348,11 +288,33 @@
             <span class="config-gallery-arrow">▾</span>
           </button>
           <div class="config-gallery-body">
-            <div class="config-gallery-row">
-              <img src="images/dragones/negra.jpg" alt="Escudo Heráldico de Dragones, negra">
-              <img src="images/dragones/blanca.jpg" alt="Escudo Heráldico de Dragones, blanca">
-              <img src="images/dragones/beige.jpg" alt="Escudo Heráldico de Dragones, beige">
-              <img src="images/dragones/gris.jpg" alt="Escudo Heráldico de Dragones, gris">
+            <div class="config-gallery-row" id="dragonesVariantsRow">
+              <img src="images/dragones/negra.jpg" data-variant="Negra" alt="Escudo Heráldico de Dragones, negra">
+              <img src="images/dragones/blanca.jpg" data-variant="Blanca" alt="Escudo Heráldico de Dragones, blanca">
+              <img src="images/dragones/beige.jpg" data-variant="Beige" alt="Escudo Heráldico de Dragones, beige">
+              <img src="images/dragones/gris.jpg" data-variant="Gris" alt="Escudo Heráldico de Dragones, gris">
+            </div>
+          </div>
+        </div>
+
+        <div class="obra-gallery">
+          <button class="config-gallery-toggle" type="button" aria-expanded="false">
+            <span>Fotografías reales de la confección</span>
+            <span class="config-gallery-arrow">▾</span>
+          </button>
+          <div class="config-gallery-body">
+            <div class="config-gallery-row" id="dragonesRealGalleryRow">
+              <img src="images/dragones-real/negra-1.jpg" data-variant="Negra" alt="Escudo Heráldico de Dragones, foto real negra 1">
+              <img src="images/dragones-real/negra-2.jpg" data-variant="Negra" alt="Escudo Heráldico de Dragones, foto real negra 2">
+              <img src="images/dragones-real/negra-3.jpg" data-variant="Negra" alt="Escudo Heráldico de Dragones, foto real negra 3">
+              <img src="images/dragones-real/blanca-1.jpg" data-variant="Blanca" class="is-hidden" alt="Escudo Heráldico de Dragones, foto real blanca 1">
+              <img src="images/dragones-real/blanca-2.jpg" data-variant="Blanca" class="is-hidden" alt="Escudo Heráldico de Dragones, foto real blanca 2">
+              <img src="images/dragones-real/blanca-3.jpg" data-variant="Blanca" class="is-hidden" alt="Escudo Heráldico de Dragones, foto real blanca 3">
+              <img src="images/dragones-real/blanca-4.jpg" data-variant="Blanca" class="is-hidden" alt="Escudo Heráldico de Dragones, foto real blanca 4">
+              <img src="images/dragones-real/beige-1.jpg" data-variant="Beige" class="is-hidden" alt="Escudo Heráldico de Dragones, foto real beige 1">
+              <img src="images/dragones-real/beige-2.jpg" data-variant="Beige" class="is-hidden" alt="Escudo Heráldico de Dragones, foto real beige 2">
+              <img src="images/dragones-real/gris-1.jpg" data-variant="Gris" class="is-hidden" alt="Escudo Heráldico de Dragones, foto real gris 1">
+              <img src="images/dragones-real/gris-2.jpg" data-variant="Gris" class="is-hidden" alt="Escudo Heráldico de Dragones, foto real gris 2">
             </div>
           </div>
         </div>
@@ -385,7 +347,6 @@
     </article>
   </div>
 </section>
-
 
 </div>
 
@@ -575,16 +536,29 @@
     </article>
   </div>
 
+  <div class="obras-grid obras-grid--single" style="margin-top:4.5rem;">
 
-  <div class="obras-grid" style="margin-top:4.5rem;">
-    <article class="obra" data-price="2700">
+    <article class="obra obra--wide" data-price="2700">
       <div class="obra-wall-clean">
-        <img src="images/crest-clean/sello-dorado-hoodie.jpg" alt="El Sello Dorado, Ouroboros Crest bordado" class="gallery-main-img">
+        <img id="selloHoodieMainImg" src="images/crest-clean/sello-dorado-hoodie.jpg" alt="El Sello, hoodie negra, Ouroboros bordado en la espalda" class="gallery-main-img">
       </div>
-      <div class="placard">
-        <p class="placard-title">"El Sello Dorado"</p>
+      <div class="placard placard--wide">
+        <p class="placard-title">"El Sello"</p>
         <p class="placard-meta">Hoodie · Felpa pesada 450gsm</p>
-        <p class="placard-desc">La versión más solemne del Ouroboros — hilo dorado metálico trazando el círculo eterno sobre la capucha oscura.</p>
+        <p class="placard-desc">
+          El Ouroboros bordado en la espalda, en la capucha oscura — el ciclo que se devora y renace,
+          según el color elegido.
+        </p>
+
+        <div class="config-field">
+          <span class="config-field-label">Variantes — <em id="selloHoodieVariantName">Dorado</em></span>
+          <div class="config-fabrics" id="selloHoodieVariants">
+            <button class="fabric-btn is-selected" type="button" data-name="Dorado" data-price="2700" data-image="images/crest-clean/sello-dorado-hoodie.jpg">Dorado</button>
+            <button class="fabric-btn" type="button" data-name="Rojo" data-price="2700" data-image="images/crest-clean/sello-rojo-hoodie.jpg">Rojo</button>
+            <button class="fabric-btn" type="button" data-name="Plateado" data-price="2700" data-image="images/crest-clean/sello-plateado-hoodie.jpg">Plateado</button>
+            <button class="fabric-btn" type="button" data-name="Bicolor" data-price="3100" data-image="images/crest-clean/sello-bicolor-hoodie.jpg">Bicolor</button>
+          </div>
+        </div>
 
         <div class="obra-gallery">
           <button class="config-gallery-toggle" type="button" aria-expanded="false">
@@ -592,162 +566,29 @@
             <span class="config-gallery-arrow">▾</span>
           </button>
           <div class="config-gallery-body">
-            <div class="config-gallery-row">
-          <img src="images/crest/sello-dorado-1.jpg" alt="Fotografía real — El Sello Dorado, detalle 1">
-          <img src="images/crest/sello-dorado-2.jpg" alt="Fotografía real — El Sello Dorado, detalle 2">
-          <img src="images/crest/sello-dorado-3.jpg" alt="Fotografía real — El Sello Dorado, detalle 3">
-          <img src="images/crest/sello-dorado-4.jpg" alt="Fotografía real — El Sello Dorado, detalle 4">
-          <img src="images/crest/sello-dorado-5.jpg" alt="Fotografía real — El Sello Dorado, detalle 5">
-          <img src="images/crest/sello-dorado-6.jpg" alt="Fotografía real — El Sello Dorado, detalle 6">
-          <img src="images/crest/sello-dorado-7.jpg" alt="Fotografía real — El Sello Dorado, detalle 7">
-          <img src="images/crest/sello-dorado-8.jpg" alt="Fotografía real — El Sello Dorado, detalle 8">
-          <img src="images/crest/sello-dorado-9.jpg" alt="Fotografía real — El Sello Dorado, detalle 9">
-          <img src="images/crest/sello-dorado-10.jpg" alt="Fotografía real — El Sello Dorado, detalle 10">
+            <div class="config-gallery-row" id="selloHoodieGalleryRow">
+              <img src="images/crest/sello-dorado-9.jpg" data-variant="Dorado" alt="Fotografía real — El Sello, Dorado, detalle">
+              <img src="images/crest/sello-dorado-6.jpg" data-variant="Dorado" alt="Fotografía real — El Sello, Dorado, detalle">
+              <img src="images/crest/sello-rojo-1.jpg" data-variant="Rojo" class="is-hidden" alt="Fotografía real — El Sello, Rojo, detalle">
+              <img src="images/crest/sello-rojo-8.jpg" data-variant="Rojo" class="is-hidden" alt="Fotografía real — El Sello, Rojo, detalle">
+              <img src="images/crest/sello-rojo-9.jpg" data-variant="Rojo" class="is-hidden" alt="Fotografía real — El Sello, Rojo, detalle">
+              <img src="images/crest/sello-plateado-5.jpg" data-variant="Plateado" class="is-hidden" alt="Fotografía real — El Sello, Plateado, detalle">
+              <img src="images/crest/sello-bicolor-1.jpg" data-variant="Bicolor" class="is-hidden" alt="Fotografía real — El Sello, Bicolor, detalle">
+              <img src="images/crest/sello-bicolor-2.jpg" data-variant="Bicolor" class="is-hidden" alt="Fotografía real — El Sello, Bicolor, detalle">
             </div>
           </div>
         </div>
 
         <div class="placard-row">
           <span class="placard-ed">Ed. 33 · MX</span>
-          <span class="placard-price">$2,700 MXN</span>
+          <span class="placard-price" id="selloHoodiePrice">$2,700 MXN</span>
         </div>
-        <button class="placard-cta" data-title="El Sello Dorado" data-meta="Hoodie · Felpa pesada 450gsm" data-price="2700" data-image="images/crest-clean/sello-dorado-hoodie.jpg">Adquirir la pieza</button>
+        <button class="placard-cta" id="selloHoodieAddBtn" data-title="El Sello (Dorado)" data-meta="Hoodie · Felpa pesada 450gsm" data-price="2700" data-image="images/crest-clean/sello-dorado-hoodie.jpg">Adquirir la pieza</button>
       </div>
     </article>
-    <article class="obra" data-price="2700">
-      <div class="obra-wall-clean">
-        <img src="images/crest-clean/sello-rojo-hoodie.jpg" alt="El Sello Rojo, Ouroboros Crest bordado" class="gallery-main-img">
-      </div>
-      <div class="placard">
-        <p class="placard-title">"El Sello Rojo"</p>
-        <p class="placard-meta">Hoodie · Felpa pesada 450gsm</p>
-        <p class="placard-desc">El Ouroboros se cierra en hilo carmesí sobre la capucha oscura — el ciclo que se devora y renace teñido del color de la ofrenda.</p>
 
-        <div class="obra-gallery">
-          <button class="config-gallery-toggle" type="button" aria-expanded="false">
-            <span>Fotografías reales de la confección</span>
-            <span class="config-gallery-arrow">▾</span>
-          </button>
-          <div class="config-gallery-body">
-            <div class="config-gallery-row">
-          <img src="images/crest/sello-rojo-1.jpg" alt="Fotografía real — El Sello Rojo, detalle 1">
-          <img src="images/crest/sello-rojo-2.jpg" alt="Fotografía real — El Sello Rojo, detalle 2">
-          <img src="images/crest/sello-rojo-3.jpg" alt="Fotografía real — El Sello Rojo, detalle 3">
-          <img src="images/crest/sello-rojo-4.jpg" alt="Fotografía real — El Sello Rojo, detalle 4">
-          <img src="images/crest/sello-rojo-5.jpg" alt="Fotografía real — El Sello Rojo, detalle 5">
-          <img src="images/crest/sello-rojo-6.jpg" alt="Fotografía real — El Sello Rojo, detalle 6">
-          <img src="images/crest/sello-rojo-7.jpg" alt="Fotografía real — El Sello Rojo, detalle 7">
-          <img src="images/crest/sello-rojo-8.jpg" alt="Fotografía real — El Sello Rojo, detalle 8">
-          <img src="images/crest/sello-rojo-9.jpg" alt="Fotografía real — El Sello Rojo, detalle 9">
-          <img src="images/crest/sello-rojo-10.jpg" alt="Fotografía real — El Sello Rojo, detalle 10">
-          <img src="images/crest/sello-rojo-11.jpg" alt="Fotografía real — El Sello Rojo, detalle 11">
-            </div>
-          </div>
-        </div>
-
-        <div class="placard-row">
-          <span class="placard-ed">Ed. 33 · MX</span>
-          <span class="placard-price">$2,700 MXN</span>
-        </div>
-        <button class="placard-cta" data-title="El Sello Rojo" data-meta="Hoodie · Felpa pesada 450gsm" data-price="2700" data-image="images/crest-clean/sello-rojo-hoodie.jpg">Adquirir la pieza</button>
-      </div>
-    </article>
-    <article class="obra" data-price="2700">
-      <div class="obra-wall-clean">
-        <img src="images/crest-clean/sello-plateado-hoodie.jpg" alt="El Sello Plateado, Ouroboros Crest bordado" class="gallery-main-img">
-      </div>
-      <div class="placard">
-        <p class="placard-title">"El Sello Plateado"</p>
-        <p class="placard-meta">Hoodie · Felpa pesada 450gsm</p>
-        <p class="placard-desc">Cromado sobre negro: la serpiente y el monograma VJ tallados en plata sobre la capucha oscura.</p>
-
-        <div class="obra-gallery">
-          <button class="config-gallery-toggle" type="button" aria-expanded="false">
-            <span>Fotografías reales de la confección</span>
-            <span class="config-gallery-arrow">▾</span>
-          </button>
-          <div class="config-gallery-body">
-            <div class="config-gallery-row">
-          <img src="images/crest/sello-plateado-1.jpg" alt="Fotografía real — El Sello Plateado, detalle 1">
-          <img src="images/crest/sello-plateado-2.jpg" alt="Fotografía real — El Sello Plateado, detalle 2">
-          <img src="images/crest/sello-plateado-3.jpg" alt="Fotografía real — El Sello Plateado, detalle 3">
-          <img src="images/crest/sello-plateado-4.jpg" alt="Fotografía real — El Sello Plateado, detalle 4">
-          <img src="images/crest/sello-plateado-5.jpg" alt="Fotografía real — El Sello Plateado, detalle 5">
-          <img src="images/crest/sello-plateado-6.jpg" alt="Fotografía real — El Sello Plateado, detalle 6">
-          <img src="images/crest/sello-plateado-7.jpg" alt="Fotografía real — El Sello Plateado, detalle 7">
-            </div>
-          </div>
-        </div>
-
-        <div class="placard-row">
-          <span class="placard-ed">Ed. 33 · MX</span>
-          <span class="placard-price">$2,700 MXN</span>
-        </div>
-        <button class="placard-cta" data-title="El Sello Plateado" data-meta="Hoodie · Felpa pesada 450gsm" data-price="2700" data-image="images/crest-clean/sello-plateado-hoodie.jpg">Adquirir la pieza</button>
-      </div>
-    </article>
-    <article class="obra" data-price="3100">
-      <div class="obra-wall-clean">
-        <img src="images/crest-clean/sello-bicolor-hoodie.jpg" alt="El Sello Bicolor, Ouroboros Crest bordado" class="gallery-main-img">
-      </div>
-      <div class="placard">
-        <p class="placard-title">"El Sello Bicolor"</p>
-        <p class="placard-meta">Hoodie · Felpa pesada 450gsm</p>
-        <p class="placard-desc">Oro y plata conviviendo en un mismo bordado — dos metales para un solo guardián.</p>
-
-        <div class="obra-gallery">
-          <button class="config-gallery-toggle" type="button" aria-expanded="false">
-            <span>Fotografías reales de la confección</span>
-            <span class="config-gallery-arrow">▾</span>
-          </button>
-          <div class="config-gallery-body">
-            <div class="config-gallery-row">
-          <img src="images/crest/sello-bicolor-1.jpg" alt="Fotografía real — El Sello Bicolor, detalle 1">
-          <img src="images/crest/sello-bicolor-2.jpg" alt="Fotografía real — El Sello Bicolor, detalle 2">
-          <img src="images/crest/sello-bicolor-3.jpg" alt="Fotografía real — El Sello Bicolor, detalle 3">
-            </div>
-          </div>
-        </div>
-
-        <div class="placard-row">
-          <span class="placard-ed">Ed. 33 · MX</span>
-          <span class="placard-price">$3,100 MXN</span>
-        </div>
-        <button class="placard-cta" data-title="El Sello Bicolor" data-meta="Hoodie · Felpa pesada 450gsm" data-price="3100" data-image="images/crest-clean/sello-bicolor-hoodie.jpg">Adquirir la pieza</button>
-      </div>
-    </article>
-    <article class="obra" data-price="3100">
-      <div class="obra-wall-clean">
-        <img src="images/crest-clean/sello-policromo-hoodie.jpg" alt="El Sello Policromo, Ouroboros Crest bordado" class="gallery-main-img">
-      </div>
-      <div class="placard">
-        <p class="placard-title">"El Sello Policromo"</p>
-        <p class="placard-meta">Hoodie · Felpa pesada Sunfade 400gsm</p>
-        <p class="placard-desc">Rosa y dorado se entrelazan en el Ouroboros sobre base decolorada — la pieza más luminosa de la colección de sellos.</p>
-
-        <div class="obra-gallery">
-          <button class="config-gallery-toggle" type="button" aria-expanded="false">
-            <span>Fotografías reales de la confección</span>
-            <span class="config-gallery-arrow">▾</span>
-          </button>
-          <div class="config-gallery-body">
-            <div class="config-gallery-row">
-          <img src="images/crest/sello-policromo-1.jpg" alt="Fotografía real — El Sello Policromo, detalle 1">
-          <img src="images/crest/sello-policromo-2.jpg" alt="Fotografía real — El Sello Policromo, detalle 2">
-            </div>
-          </div>
-        </div>
-
-        <div class="placard-row">
-          <span class="placard-ed">Ed. 33 · MX</span>
-          <span class="placard-price">$3,100 MXN</span>
-        </div>
-        <button class="placard-cta" data-title="El Sello Policromo" data-meta="Hoodie · Felpa pesada Sunfade 400gsm" data-price="3100" data-image="images/crest-clean/sello-policromo-hoodie.jpg">Adquirir la pieza</button>
-      </div>
-    </article>
   </div>
 </section>
-
 
 </div>
 
@@ -785,11 +626,29 @@
           <img src="images/config-urobros-decolorado.jpeg" alt="Fotografía real, tela Negro Decolorado con Uróboros" data-fabric="Negro Decolorado">
           <img src="images/elemental-extra/extra-1.jpg" alt="Fotografía real, detalle bordado cursivo VJ" data-fabric="Negro Clásico">
           <img src="images/elemental-extra/extra-2.jpg" alt="Fotografía real, detalle bordado cursivo VJ" data-fabric="Negro Clásico">
-          <img src="images/elemental-extra/extra-3.jpg" alt="Fotografía real, detalle bordado cursivo VJ" data-fabric="Negro Clásico">
           <img src="images/elemental-extra/extra-4.jpg" alt="Fotografía real, etiqueta interior V.Joscents" data-fabric="Negro Clásico">
           <img src="images/elemental-extra/extra-5.jpg" alt="Fotografía real, empaque y prendas confeccionadas" data-fabric="Negro Clásico">
         </div>
         <p class="config-note">Las fotografías de detalle corresponden a la confección y bordado reales. El color del hilo se produce de acuerdo con la variante seleccionada y puede presentar ligeras variaciones según la pantalla.</p>
+        </div>
+      </div>
+
+      <div class="obra-gallery">
+        <button class="config-gallery-toggle" type="button" aria-expanded="false">
+          <span>Fotografías reales del Uróboros</span>
+          <span class="config-gallery-arrow">▾</span>
+        </button>
+        <div class="config-gallery-body">
+          <div class="config-gallery-row">
+            <img src="images/crest/sello-dorado-1.jpg" alt="Fotografía real, Uróboros dorado">
+            <img src="images/crest/sello-dorado-8.jpg" alt="Fotografía real, Uróboros dorado">
+            <img src="images/crest/sello-rojo-2.jpg" alt="Fotografía real, Uróboros rojo">
+            <img src="images/crest/sello-plateado-3.jpg" alt="Fotografía real, Uróboros plateado">
+            <img src="images/crest/sello-plateado-5.jpg" alt="Fotografía real, Uróboros plateado">
+            <img src="images/crest/sello-bicolor-1.jpg" alt="Fotografía real, Uróboros bicolor">
+            <img src="images/crest/sello-bicolor-2.jpg" alt="Fotografía real, Uróboros bicolor">
+            <img src="images/crest/sello-bicolor-3.jpg" alt="Fotografía real, Uróboros bicolor">
+          </div>
         </div>
       </div>
     </div>
@@ -850,8 +709,9 @@
         <div class="config-uroboros-variants" id="configUroborosVariants">
           <span class="config-field-label">Acabado del Uróboros — <em id="configUroborosVariantName">Dorado</em></span>
           <div class="config-fabrics">
-            <button class="fabric-btn is-selected" type="button" data-variant="Dorado" data-image="images/config-uroboros-dorado.jpg">Dorado</button>
-            <button class="fabric-btn" type="button" data-variant="Plata" data-image="images/config-uroboros-plata.jpg">Plata</button>
+            <button class="fabric-btn is-selected" type="button" data-variant="Dorado" data-image="images/crest-clean/sello-dorado-tee.jpg">Dorado</button>
+            <button class="fabric-btn" type="button" data-variant="Plata" data-image="images/crest-clean/sello-plateado-tee.jpg">Plata</button>
+            <button class="fabric-btn" type="button" data-variant="Rojo" data-image="images/crest-clean/sello-rojo-back.jpg">Rojo</button>
             <button class="fabric-btn" type="button" data-variant="Tono sobre tono" data-image="images/config-uroboros-tono.jpg">Tono sobre tono</button>
           </div>
         </div>
@@ -885,17 +745,32 @@
 
       <div class="config-gallery">
         <button class="config-gallery-toggle" id="premiumGalleryToggle" type="button" aria-expanded="false">
-          <span>Variantes de color</span>
+          <span>Fotografías reales del modelo</span>
           <span class="config-gallery-arrow">▾</span>
         </button>
         <div class="config-gallery-body" id="premiumGalleryBody">
         <div class="config-gallery-row" id="premiumGalleryRow">
-          <img src="images/premium-v2/black.jpg" alt="VJ Elemental Premium, base Black French Terry" data-fabric="Black French Terry">
-          <img src="images/premium-v2/grey-sunfade.jpg" alt="VJ Elemental Premium, base Grey Sunfade" data-fabric="Grey Sunfade">
-          <img src="images/premium-v2/red-sunfade.jpg" alt="VJ Elemental Premium, base Red Sunfade" data-fabric="Red Sunfade">
-          <img src="images/premium-v2/blue-sunfade.jpg" alt="VJ Elemental Premium, base Blue Sunfade" data-fabric="Blue Sunfade">
-          <img src="images/premium-v2/olive-sunfade.jpg" alt="VJ Elemental Premium, base Olive Sunfade" data-fabric="Olive Sunfade">
+          <img src="images/premium-real/grey-1.jpg" alt="VJ Elemental Premium, foto real Grey Sunfade" data-fabric="Grey Sunfade">
+          <img src="images/premium-real/grey-2.jpg" alt="VJ Elemental Premium, foto real Grey Sunfade, detalle" data-fabric="Grey Sunfade">
+          <img src="images/premium-real/grey-3.jpg" alt="VJ Elemental Premium, foto real Grey Sunfade" data-fabric="Grey Sunfade">
+          <img src="images/premium-real/grey-4.jpg" alt="VJ Elemental Premium, foto real Grey Sunfade" data-fabric="Grey Sunfade">
+          <img src="images/premium-real/blue-1.jpg" alt="VJ Elemental Premium, foto real Blue Sunfade" data-fabric="Blue Sunfade">
         </div>
+        <p class="config-note" id="premiumGalleryEmptyNote">Aún no hay fotografías reales de esta base.</p>
+        </div>
+      </div>
+
+      <div class="obra-gallery">
+        <button class="config-gallery-toggle" type="button" aria-expanded="false">
+          <span>Fotografías reales del Ouroboros</span>
+          <span class="config-gallery-arrow">▾</span>
+        </button>
+        <div class="config-gallery-body">
+          <div class="config-gallery-row">
+            <img src="images/premium-real/grey-ouroboros.jpg" alt="VJ Elemental Premium, Ouroboros bordado, foto real">
+            <img src="images/premium-real/blue-ouroboros.jpg" alt="VJ Elemental Premium, Ouroboros bordado, foto real">
+            <img src="images/premium-real/olive-ouroboros.jpg" alt="VJ Elemental Premium, Ouroboros bordado, foto real">
+          </div>
         </div>
       </div>
     </div>
@@ -942,6 +817,7 @@
           <span class="config-toggle-box"></span>
           <span class="config-toggle-text">Sumar el Ouroboros bordado en la espalda <em id="premiumUroborosPrice">(+$650 MXN)</em></span>
         </label>
+        <p class="config-field-note is-visible">Por ahora disponible en un solo diseño (dorado) — más acabados próximamente.</p>
       </div>
 
       <div class="config-buy-bar" id="premiumBuyBar">
@@ -968,7 +844,25 @@
 
     <div class="config-visual">
       <div class="config-frame-plain" id="escudoFrame">
-        <img id="escudoMainImg" src="images/escudo/negra-longsleeve.jpg" alt="VJ Escudo Heráldico, prenda negra" class="config-main-img gallery-main-img">
+        <img id="escudoMainImg" src="images/escudo/negra-hoodie.jpg" alt="VJ Escudo Heráldico, prenda negra" class="config-main-img gallery-main-img">
+      </div>
+
+      <div class="config-gallery">
+        <button class="config-gallery-toggle" type="button" aria-expanded="false">
+          <span>Fotografías reales</span>
+          <span class="config-gallery-arrow">▾</span>
+        </button>
+        <div class="config-gallery-body">
+        <div class="config-gallery-row">
+          <img src="images/escudo-real/negra-1.jpg" alt="VJ Escudo Heráldico, foto real negra">
+          <img src="images/escudo-real/azul-1.jpg" alt="VJ Escudo Heráldico, foto real azul">
+          <img src="images/escudo-real/olivo-1.jpg" alt="VJ Escudo Heráldico, foto real olivo 1">
+          <img src="images/escudo-real/olivo-2.jpg" alt="VJ Escudo Heráldico, foto real olivo 2">
+          <img src="images/escudo-real/olivo-3.jpg" alt="VJ Escudo Heráldico, foto real olivo 3">
+          <img src="images/escudo-real/multicolor-1.jpg" alt="VJ Escudo Heráldico, foto real multicolor 1">
+          <img src="images/escudo-real/multicolor-2.jpg" alt="VJ Escudo Heráldico, foto real multicolor 2">
+        </div>
+        </div>
       </div>
     </div>
 
@@ -979,11 +873,12 @@
       <div class="config-field">
         <span class="config-field-label">Variantes — <em id="escudoVariantName">Negra</em></span>
         <div class="config-fabrics" id="escudoVariants">
-          <button class="fabric-btn is-selected" type="button" data-name="Negra" data-image="images/escudo/negra-longsleeve.jpg">Negra</button>
+          <button class="fabric-btn is-selected" type="button" data-name="Negra" data-image="images/escudo/negra-hoodie.jpg">Negra</button>
           <button class="fabric-btn" type="button" data-name="Azul" data-image="images/escudo/azul-hoodie.jpg">Azul</button>
           <button class="fabric-btn" type="button" data-name="Olivo A" data-image="images/escudo/olivo-hoodie-1.jpg">Olivo A</button>
           <button class="fabric-btn" type="button" data-name="Olivo B" data-image="images/escudo/olivo-hoodie-2.jpg">Olivo B</button>
           <button class="fabric-btn" type="button" data-name="Olivo C" data-image="images/escudo/olivo-hoodie-3.jpg">Olivo C</button>
+          <button class="fabric-btn" type="button" data-name="Multicolor" data-image="images/escudo/multicolor-hoodie.jpg">Multicolor</button>
         </div>
       </div>
 
@@ -995,9 +890,7 @@
   </div>
 </section>
 
-
 <!-- ================= PIEZA ANCLA — VJ ELEMENTAL PREMIUM ================= -->
-
 
 </div>
 
