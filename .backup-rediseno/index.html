@@ -2,14 +2,12 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0b0906">
-<meta name="description" content="Vera Joscents — Las Ninfas de la Perfumería. Colección cápsula Nº 33 de piezas textiles numeradas. Tijuana, MX.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VERA JOSCENTS — Museo de la Perfumería</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -19,8 +17,8 @@
 <!-- ================= NAV ================= -->
 <header class="site-nav" id="siteNav">
   <div class="nav-inner">
-    <a href="#" data-tab="inicio" class="nav-mark" aria-label="Vera Joscents — volver a la sala de fundación">
-      <img src="images/logob.png" alt="" class="nav-mark-img">
+    <a href="#rotonda" class="nav-mark">
+      <img src="images/logob.png" alt="VJ" class="nav-mark-img">
     </a>
     <nav class="nav-links">
       <a href="#" data-tab="inicio" class="is-active">Inicio</a>
@@ -39,64 +37,13 @@
           <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M16.6 3c.4 2.4 2 4 4.4 4.2v3.1c-1.5.1-2.9-.4-4.4-1.3v6.6c0 3.4-2.6 5.9-5.9 5.9S4.8 19 4.8 15.6c0-3.3 2.6-5.9 5.9-5.9.3 0 .6 0 .9.1v3.2c-.3-.1-.6-.2-.9-.2-1.5 0-2.7 1.2-2.7 2.8s1.2 2.8 2.7 2.8 2.8-1.2 2.8-2.8V3h3.1z"/></svg>
         </a>
       </div>
-      <button class="nav-cart" aria-label="Registro de adquisiciones">
-        <svg class="cart-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square" aria-hidden="true"><path d="M4.6 7.6h14.8l-1.2 11.9H5.8z"/><path d="M8.8 10.1V6.7a3.2 3.2 0 0 1 6.4 0v3.4"/></svg>
+      <button class="nav-cart" aria-label="Adquisiciones">
         <span class="cart-count">0</span>
         <span class="cart-label">Adquisiciones</span>
-      </button>
-      <button class="nav-burger" id="navBurger" type="button"
-              aria-label="Abrir el recorrido" aria-expanded="false" aria-controls="navMenu">
-        <span class="burger-bar"></span>
-        <span class="burger-bar"></span>
-        <span class="burger-bar"></span>
       </button>
     </div>
   </div>
 </header>
-
-<!-- ================= RECORRIDO MÓVIL ================= -->
-<div class="nav-menu" id="navMenu" aria-hidden="true">
-  <div class="nav-menu-inner">
-    <p class="eyebrow nav-menu-eyebrow">Recorrido · Colección 33</p>
-    <nav class="nav-menu-list" aria-label="Salas del museo">
-      <a href="#" data-tab="inicio">
-        <span class="nm-num">00</span>
-        <span class="nm-name">Rotonda</span>
-        <span class="nm-desc">Sala de fundación</span>
-      </a>
-      <a href="#" data-tab="camisetas">
-        <span class="nm-num">I</span>
-        <span class="nm-name">Camisetas</span>
-        <span class="nm-desc">Retratos sobre algodón</span>
-      </a>
-      <a href="#" data-tab="sudaderas">
-        <span class="nm-num">II</span>
-        <span class="nm-name">Sudaderas</span>
-        <span class="nm-desc">Frescos murales</span>
-      </a>
-      <a href="#" data-tab="zip">
-        <span class="nm-num">III</span>
-        <span class="nm-name">Zip-Ups</span>
-        <span class="nm-desc">Retablos abiertos</span>
-      </a>
-      <a href="#" data-tab="hoodies">
-        <span class="nm-num">IV</span>
-        <span class="nm-name">Hoodies</span>
-        <span class="nm-desc">Óleo oscuro</span>
-      </a>
-      <a href="#" data-tab="personalizable">
-        <span class="nm-num">V</span>
-        <span class="nm-name">Personalizable</span>
-        <span class="nm-desc">Bordado a medida</span>
-      </a>
-    </nav>
-    <div class="nav-menu-foot">
-      <a href="https://www.instagram.com/verajoscents/" target="_blank" rel="noopener">Instagram</a>
-      <span class="dot">·</span>
-      <a href="https://www.tiktok.com/@verajoscentstj" target="_blank" rel="noopener">TikTok</a>
-    </div>
-  </div>
-</div>
 
 <!-- ================= ROTONDA / HERO ================= -->
 <div class="tab-panel is-active" id="tab-inicio" data-tab-panel="inicio">
@@ -136,25 +83,17 @@
     <span>Est. 2025</span>
   </div>
 
-  <div class="rotonda-actions">
-    <a href="#" data-tab="camisetas" class="btn btn--solid">Entrar a la colección</a>
-    <a href="#concepto" class="btn btn--ghost">Cédula curatorial</a>
-  </div>
-
   <a href="#concepto" class="rotonda-scroll" aria-label="Descender a la galería">
     <span class="scroll-line"></span>
     <span>Descender a la Galería</span>
   </a>
 </section>
-<section class="concepto" id="concepto" data-reveal>
+<section class="concepto" id="concepto">
   <img src="images/ninfasmojadas.png" class="concepto-nymph" alt="" aria-hidden="true">
   <div class="concepto-inner">
     <div class="concepto-text">
-      <div class="concepto-head">
-        <p class="eyebrow">Cédula curatorial · 01</p>
-        <h2 class="concepto-title">Perfume es Poder</h2>
-      </div>
-      <div class="concepto-copy">
+      <p class="eyebrow">Cédula curatorial · 01</p>
+      <h2 class="concepto-title">Perfume es Poder</h2>
       <p class="concepto-body">
         Vera Joscents nace de una obsesión: convertir el ritual del perfume en un acto de devoción
         visual. Tomamos las composiciones de los grandes maestros del claroscuro —figuras suspendidas
@@ -170,7 +109,6 @@
         <span class="sig-line">Vera Joscents</span>
         <span class="sig-role">Curador &amp; Fundador</span>
       </div>
-      </div>
     </div>
 
     <div class="concepto-frame">
@@ -185,7 +123,7 @@
     </div>
   </div>
 </section>
-<section class="salas-index" id="salas" data-reveal>
+<section class="salas-index" id="salas">
   <p class="eyebrow center">Recorrido sugerido</p>
   <h2 class="salas-title">Las Salas</h2>
   <div class="salas-grid">
@@ -193,31 +131,26 @@
       <span class="sala-num">Sala I</span>
       <span class="sala-name">Camisetas</span>
       <span class="sala-desc">Retratos íntimos sobre algodón peinado.</span>
-      <span class="sala-go" aria-hidden="true"><span class="sala-go-label">Entrar</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
     </a>
     <a href="#" data-tab="sudaderas" class="sala-card">
       <span class="sala-num">Sala II</span>
       <span class="sala-name">Sudaderas</span>
       <span class="sala-desc">Frescos murales para la vida diaria.</span>
-      <span class="sala-go" aria-hidden="true"><span class="sala-go-label">Entrar</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
     </a>
     <a href="#" data-tab="zip" class="sala-card">
       <span class="sala-num">Sala III</span>
       <span class="sala-name">Zip-Ups</span>
       <span class="sala-desc">Retablos que se abren al centro.</span>
-      <span class="sala-go" aria-hidden="true"><span class="sala-go-label">Entrar</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
     </a>
     <a href="#" data-tab="hoodies" class="sala-card">
       <span class="sala-num">Sala IV</span>
       <span class="sala-name">Hoodies</span>
       <span class="sala-desc">Óleo oscuro, capucha como marco.</span>
-      <span class="sala-go" aria-hidden="true"><span class="sala-go-label">Entrar</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
     </a>
     <a href="#" data-tab="personalizable" class="sala-card">
       <span class="sala-num">Sala V</span>
       <span class="sala-name">Personalizable</span>
       <span class="sala-desc">El bordado se hace a su medida.</span>
-      <span class="sala-go" aria-hidden="true"><span class="sala-go-label">Entrar</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
     </a>
   </div>
 </section>
@@ -961,7 +894,7 @@
 
 </div>
 
-<section class="visitas" id="visitas" data-reveal>
+<section class="visitas" id="visitas">
   <div class="visitas-inner">
     <div class="visitas-col">
       <p class="eyebrow">Información al visitante</p>
@@ -1043,6 +976,6 @@
   </div>
 </aside>
 
-<script src="script.js?v=3"></script>
+<script src="script.js"></script>
 </body>
 </html>
