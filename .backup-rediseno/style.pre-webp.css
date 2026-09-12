@@ -353,7 +353,7 @@ a{ color:inherit; text-decoration:none; }
   --frame-topbot:calc(var(--frame-side) * 0.657);
   border-style:solid;
   border-width:var(--frame-topbot) var(--frame-side);
-  border-image-source:url("images/marco.webp");
+  border-image-source:url("images/marco.png");
   border-image-slice:9.1% 14.1% 9.25% 13.85% fill;
   border-image-repeat:stretch;
   background:radial-gradient(ellipse 75% 70% at 50% 42%, #4e463a 0%, #362f26 55%, #211c16 100%);
@@ -1760,86 +1760,4 @@ body.menu-open{ overflow:hidden; }
 @media (max-width:560px){
   .footer-motto{ font-size:1.35rem; }
   .footer-col a{ padding:.45rem 0; }
-}
-
-/* ════════════════════════════════════════════════════════════
-   FICHA DE OBRA — una sola pieza, no dos bloques sueltos
-   Muro iluminado arriba, cédula abajo, separados por 1px.
-   ════════════════════════════════════════════════════════════ */
-.obra{
-  gap:0;
-  background:var(--wall);
-  border:1px solid var(--hair);
-}
-.obra-wall,
-.obra-wall-clean{
-  border-bottom:1px solid var(--hair);
-  box-shadow:none;
-}
-
-.placard{
-  background:transparent;
-  border:0;
-  padding:1.9rem 1.8rem 1.8rem;
-}
-/* la chincheta dorada sobraba al unificar la ficha */
-.placard::before{ display:none; }
-
-.placard--wide{ max-width:none; }
-
-.placard-row{
-  border-top:1px solid var(--hair);
-  border-top-style:solid;
-  padding-top:1.1rem;
-  margin-bottom:1.3rem;
-}
-.placard-title{ margin-bottom:.5rem; text-wrap:balance; }
-.placard-desc{ text-wrap:pretty; }
-
-.placard-cta{
-  min-height:48px;
-  border-radius:1px;
-  letter-spacing:.18em;
-}
-.placard-cta:active{ transform:scale(.99); }
-
-@media (max-width:560px){
-  .placard{ padding:1.6rem 1.3rem 1.5rem; }
-  .placard-title{ font-size:1.35rem; }
-  .obra{ gap:0; }
-}
-
-/* ---------- modal de talla: el botón de cerrar chocaba con el título ---------- */
-.size-modal{ padding-top:3.6rem; }
-.size-modal-close{ top:12px; right:12px; }
-.size-options{ flex-wrap:wrap; }
-.size-btn{ min-width:52px; min-height:52px; }
-.size-confirm{ min-height:48px; }
-
-/* ---------- registro de adquisiciones ---------- */
-.cart-drawer{ padding-bottom:env(safe-area-inset-bottom); }
-.cart-footer{ padding-bottom:calc(2rem + env(safe-area-inset-bottom)); }
-.cart-checkout{ min-height:50px; }
-
-@media (max-width:1024px){
-  /* los controles de cantidad eran de 20px: imposibles de acertar con el pulgar */
-  .cart-qty-btn{ width:34px; height:34px; font-size:.9rem; }
-  .cart-item-qty{ gap:.5rem; }
-  .cart-item-remove{ padding:.4rem 0; }
-}
-@media (max-width:560px){
-  .cart-drawer{ width:min(440px, 100vw); border-left:0; }
-  .cart-item{ grid-template-columns:58px 1fr auto; gap:.8rem; }
-  .cart-item-frame{ width:58px; height:58px; }
-}
-
-/* ---------- contacto: enlaces reales, tocables con el pulgar ---------- */
-.visitas-text a{
-  display:inline-block;
-  padding:.68rem 0;
-  line-height:1.35;
-}
-.visitas-text{ line-height:1.5; }
-@media (max-width:1024px){
-  .footer-col a{ padding:.55rem 0; }
 }

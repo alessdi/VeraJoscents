@@ -382,9 +382,9 @@ if (configAddBtn) {
     fabric: 'Negro Clásico',
     fabricHasEmbroideryChoice: true,
     frontImage: configMainImg ? configMainImg.getAttribute('src') : '',
-    backImage: 'images/config-uroboros-dorado.webp',
+    backImage: 'images/config-uroboros-dorado.jpg',
     uroborosVariant: 'Dorado',
-    uroborosVariantImage: 'images/config-uroboros-dorado.webp',
+    uroborosVariantImage: 'images/config-uroboros-dorado.jpg',
     color: 'Blanco',
     uroboros: false,
   };
@@ -891,95 +891,4 @@ renderCart();
 (function () {
   const y = document.getElementById('footerYear');
   if (y) y.textContent = new Date().getFullYear();
-})();
-
-// --- Vídeo de la rotonda: entra después del primer pintado ---
-// El póster (55 KB) ya está precargado, así que el hero se ve completo
-// de inmediato; el vídeo (2.5 MB) no compite con el render inicial y
-// nunca se descarga en conexiones medidas o lentas.
-(function () {
-  const video = document.querySelector('.rotonda-canvas video');
-  if (!video || !video.dataset.src) return;
-
-  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  // sólo se omite en conexiones realmente limitadas: la carga ya es diferida,
-  // así que en 3G entra después del render sin estorbar al primer pintado
-  const restringida = conn && (conn.saveData === true ||
-                               /^(slow-)?2g$/.test(conn.effectiveType || ''));
-  const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (restringida || sinMovimiento) return;   // se queda el póster
-
-  function cargar() {
-    if (video.dataset.cargado === '1') return;
-    video.dataset.cargado = '1';
-    const source = document.createElement('source');
-    source.src = video.dataset.src;
-    source.type = 'video/mp4';
-    video.appendChild(source);
-    video.preload = 'auto';
-    video.load();
-    const p = video.play();
-    if (p && p.catch) p.catch(() => {});   // autoplay bloqueado: queda el póster
-  }
-
-  // al volver a la pestaña el navegador deja el vídeo pausado
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' &&
-        video.dataset.cargado === '1' && video.paused) {
-      const p = video.play();
-      if (p && p.catch) p.catch(() => {});
-    }
-  });
-
-  const arrancar = () => (window.requestIdleCallback
-    ? requestIdleCallback(cargar, { timeout: 2000 })
-    : setTimeout(cargar, 600));
-
-  if (document.readyState === 'complete') arrancar();
-  else window.addEventListener('load', arrancar, { once: true });
-})();
-
-// ============================================================
-// HIDRATACIÓN DE SALAS
-// Las imágenes de las salas cerradas llevan data-src en vez de src.
-// `loading="lazy"` no sirve dentro de un contenedor display:none —
-// Chrome las descarga igual — así que la sala se hidrata al abrirse.
-// ============================================================
-(function () {
-  function hidratar(panel) {
-    if (!panel || panel.dataset.hidratado === '1') return;
-    panel.dataset.hidratado = '1';
-    panel.querySelectorAll('img[data-src]').forEach((img) => {
-      img.src = img.dataset.src;
-      img.removeAttribute('data-src');
-    });
-  }
-
-  const paneles = document.querySelectorAll('.tab-panel');
-  if (!paneles.length) return;
-
-  // la sala visible al cargar
-  paneles.forEach((p) => { if (p.classList.contains('is-active')) hidratar(p); });
-
-  if (window.MutationObserver) {
-    const mo = new MutationObserver((muts) => {
-      muts.forEach((m) => {
-        if (m.attributeName === 'class' && m.target.classList.contains('is-active')) {
-          hidratar(m.target);
-        }
-      });
-    });
-    paneles.forEach((p) => mo.observe(p, { attributes: true, attributeFilter: ['class'] }));
-  } else {
-    paneles.forEach(hidratar);
-  }
-
-  // red de seguridad: si algo abre una sala sin pasar por las clases,
-  // al primer toque sobre un enlace de pestaña se hidrata el destino
-  document.addEventListener('click', (e) => {
-    const link = e.target.closest('[data-tab]');
-    if (!link) return;
-    const destino = document.getElementById('tab-' + link.dataset.tab);
-    if (destino) setTimeout(() => hidratar(destino), 0);
-  }, true);
 })();
