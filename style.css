@@ -410,12 +410,13 @@ body.menu-open{ overflow:hidden; }
   background:transparent; border:0; border-radius:0;
   box-shadow:inset 0 -1px 0 transparent;
   color:var(--color-ink-2);
-  font-family:var(--font-outlier); font-size:var(--text-sm);
+  font-family:var(--font-display); font-size:var(--text-lg); line-height:1;
+  white-space:nowrap;
   cursor:pointer;
   transition:color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out);
 }
-.filtro:hover{ color:var(--color-ink); }
-.filtro[aria-pressed="true"]{ color:var(--color-accent-light); box-shadow:inset 0 -1px 0 var(--color-accent); }
+.filtro:hover{ color:var(--color-white); }
+.filtro[aria-pressed="true"]{ color:var(--color-flame); box-shadow:inset 0 -1px 0 var(--color-flame); }
 .filtro:active{ transform:scale(.98); }
 .todo-count{ font-family:var(--font-outlier); font-size:var(--text-sm); color:var(--color-ink-2); font-variant-numeric:tabular-nums; }
 
@@ -438,8 +439,8 @@ body.menu-open{ overflow:hidden; }
 .todo-shot img{ width:100%; height:100%; object-fit:contain; }
 /* las fotos montadas en marco: el encuadre se acerca a la prenda y deja fuera el marco */
 .todo-shot--foto img{ object-fit:cover; object-position:50% 46%; transform:scale(1.46); }
-.todo-name{ font-family:var(--font-outlier); font-size:var(--text-sm); color:var(--color-ink); line-height:1.3; transition:color var(--dur-short) var(--ease-out); }
-.todo-link:hover .todo-name{ color:var(--color-accent-light); }
+.todo-name{ font-family:var(--font-body); font-size:var(--text-lg); color:var(--color-ink); line-height:1.25; transition:color var(--dur-short) var(--ease-out); }
+.todo-link:hover .todo-name{ color:var(--color-flame); }
 .todo-link:hover .todo-shot{ transform:translateY(-4px); }
 
 /* ============================================================
@@ -674,7 +675,8 @@ body.size-modal-open{ overflow:hidden; }
   .obras-grid,.obras-grid--single{ grid-template-columns:minmax(0,1fr); }
   .todo-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:var(--space-xl) var(--space-md); }
   .todo-bar{ margin-bottom:var(--space-xl); }
-  .filtro{ padding-inline:var(--space-xs); }
+  .filtro{ padding-inline:var(--space-xs); font-size:var(--text-md); }
+  .filtros{ gap:0; }
   .obra-wall{ padding:var(--space-md); }
   .config-gallery-row{ grid-template-columns:repeat(3, minmax(0,1fr)); }
   .footer-motto{ font-size:var(--text-2xl); }
