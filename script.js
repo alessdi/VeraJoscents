@@ -1,3 +1,7 @@
+// con script, se habilitan los estados que dependen de él (puerta 62)
+document.documentElement.classList.add('js');
+const WHATSAPP_NUMBER = '529811433701';
+
 // ============================================================
 // VERA JOSCENTS — interacciones del boceto
 // ============================================================
@@ -227,8 +231,6 @@ document.querySelectorAll('.cart-checkout').forEach((btn) => {
   btn.addEventListener('click', () => {
     if (cart.length === 0) return;
 
-    // Número de WhatsApp de contacto (formato internacional, sin "+" ni espacios)
-    const WHATSAPP_NUMBER = '529811433701';
 
     const lineas = cart.map((it, i) => {
       const sub = it.price * it.qty;
@@ -249,12 +251,12 @@ document.querySelectorAll('.cart-checkout').forEach((btn) => {
     btn.textContent = 'Abriendo WhatsApp…';
     setTimeout(() => {
       window.open(url, '_blank');
-      btn.textContent = 'Solicitar Adquisición';
+      btn.textContent = 'Pedir por WhatsApp';
     }, 400);
   });
 });
 
-// --- Botones "Adquirir la pieza" → abren el modal de tallas ---
+// --- Botones "Comprar" → abren el modal de tallas ---
 const sizeOverlay = document.getElementById('sizeOverlay');
 const sizeModal = document.getElementById('sizeModal');
 const sizeModalTitle = document.getElementById('sizeModalTitle');
@@ -262,6 +264,7 @@ const sizeOptionsEl = document.getElementById('sizeOptions');
 const sizeConfirmBtn = document.getElementById('sizeConfirm');
 const sizeModalCloseBtn = document.getElementById('sizeModalClose');
 const sizeHintEl = document.getElementById('sizeHint');
+const sizeBuyNowBtn = document.getElementById('sizeBuyNow');
 
 let pendingItem = null;
 let pendingBtn = null;
@@ -271,9 +274,10 @@ function openSizeModal(data, btn) {
   pendingItem = data;
   pendingBtn = btn;
   selectedSize = null;
-  sizeModalTitle.textContent = `"${data.title}"`;
+  sizeModalTitle.textContent = `“${data.title}”`;
   sizeOptionsEl.querySelectorAll('.size-btn').forEach((b) => b.classList.remove('is-selected'));
   sizeConfirmBtn.disabled = true;
+  if (sizeBuyNowBtn) sizeBuyNowBtn.disabled = true;
   sizeHintEl.textContent = 'Elige una talla para continuar.';
 
   sizeModal.classList.add('is-open');
@@ -298,6 +302,7 @@ if (sizeOptionsEl) {
       sizeOptionsEl.querySelectorAll('.size-btn').forEach((b) => b.classList.remove('is-selected'));
       btn.classList.add('is-selected');
       sizeConfirmBtn.disabled = false;
+      if (sizeBuyNowBtn) sizeBuyNowBtn.disabled = false;
       sizeHintEl.textContent = `Talla ${selectedSize} seleccionada.`;
     });
   });
@@ -308,10 +313,24 @@ if (sizeConfirmBtn) {
     if (!selectedSize || !pendingItem) return;
     addToCart({ ...pendingItem, size: selectedSize });
     if (pendingBtn) {
-      const original = 'Adquirir la pieza';
-      pendingBtn.textContent = 'Añadida a la colección ✓';
+      const original = 'Comprar';
+      pendingBtn.textContent = 'Añadida al pedido';
       setTimeout(() => { pendingBtn.textContent = original; }, 1600);
     }
+    closeSizeModal();
+  });
+}
+
+// --- Compra directa: una pieza, su talla, directo a WhatsApp, sin pasar por el pedido ---
+if (sizeBuyNowBtn) {
+  sizeBuyNowBtn.addEventListener('click', () => {
+    if (!selectedSize || !pendingItem) return;
+    const it = pendingItem;
+    const mensaje =
+      `Hola. Quiero comprar esta pieza de la Colección Cápsula Nº 33:\n\n` +
+      `“${it.title}” (${it.meta}), talla ${selectedSize}, ${formatMXN(parseFloat(it.price))}\n\n` +
+      `¿Me confirman disponibilidad y envío? Gracias.`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
     closeSizeModal();
   });
 }
@@ -401,7 +420,7 @@ if (configAddBtn) {
       configAddBtn.textContent = 'Elige una talla';
     } else {
       configAddBtn.disabled = false;
-      configAddBtn.textContent = 'Añadir a la Colección';
+      configAddBtn.textContent = 'Añadir al pedido';
     }
   }
 
@@ -505,7 +524,7 @@ if (configAddBtn) {
       image: configState.uroboros ? configState.backImage : configState.frontImage,
       size: configState.size,
     });
-    configAddBtn.textContent = 'Añadida a la colección ✓';
+    configAddBtn.textContent = 'Añadida al pedido';
     setTimeout(updateConfigButton, 1600);
   });
 
@@ -533,32 +552,32 @@ const PREMIUM_UROBOROS_SURCHARGE = {
 };
 const PREMIUM_PALETTES = {
   full: [
-    { name: 'Blanco', hex: '#f2efe6' },
-    { name: 'Rojo', hex: '#8c1c22' },
-    { name: 'Azul', hex: '#1c2a4d' },
-    { name: 'Turquesa', hex: '#2fa9a1' },
-    { name: 'Verde', hex: '#3c7a4e' },
-    { name: 'Fuchsia', hex: '#d6708f' },
-    { name: 'Morado', hex: '#8f7bc7' },
-    { name: 'Dorado', hex: '#b9954a' },
-    { name: 'Negro', hex: '#111111' },
-    { name: 'Plateado metálico', hex: '#c7cad1' },
-    { name: 'Dorado metálico', hex: '#c9a227' },
+    { name: 'Blanco', hex: 'var(--thread-blanco)' },
+    { name: 'Rojo', hex: 'var(--thread-rojo)' },
+    { name: 'Azul', hex: 'var(--thread-azul)' },
+    { name: 'Turquesa', hex: 'var(--thread-turquesa)' },
+    { name: 'Verde', hex: 'var(--thread-verde)' },
+    { name: 'Fuchsia', hex: 'var(--thread-fucsia)' },
+    { name: 'Morado', hex: 'var(--thread-morado)' },
+    { name: 'Dorado', hex: 'var(--thread-dorado)' },
+    { name: 'Negro', hex: 'var(--thread-negro)' },
+    { name: 'Plateado metálico', hex: 'var(--thread-plateado)' },
+    { name: 'Dorado metálico', hex: 'var(--thread-dorado-metal)' },
   ],
   red: [
-    { name: 'Triple Red (tono sobre tono)', hex: '#8c1c22' },
-    { name: 'Negro', hex: '#111111' },
-    { name: 'Fuchsia', hex: '#d6708f' },
-    { name: 'Plateado metálico', hex: '#c7cad1' },
-    { name: 'Dorado metálico', hex: '#c9a227' },
+    { name: 'Triple Red (tono sobre tono)', hex: 'var(--thread-rojo)' },
+    { name: 'Negro', hex: 'var(--thread-negro)' },
+    { name: 'Fuchsia', hex: 'var(--thread-fucsia)' },
+    { name: 'Plateado metálico', hex: 'var(--thread-plateado)' },
+    { name: 'Dorado metálico', hex: 'var(--thread-dorado-metal)' },
   ],
   olive: [
-    { name: 'Triple Olive (tono sobre tono)', hex: '#6b6f4a' },
-    { name: 'Negro', hex: '#111111' },
-    { name: 'Fuchsia', hex: '#d6708f' },
-    { name: 'Plateado metálico', hex: '#c7cad1' },
-    { name: 'Dorado metálico', hex: '#c9a227' },
-    { name: 'Morado', hex: '#8f7bc7' },
+    { name: 'Triple Olive (tono sobre tono)', hex: 'var(--thread-olivo)' },
+    { name: 'Negro', hex: 'var(--thread-negro)' },
+    { name: 'Fuchsia', hex: 'var(--thread-fucsia)' },
+    { name: 'Plateado metálico', hex: 'var(--thread-plateado)' },
+    { name: 'Dorado metálico', hex: 'var(--thread-dorado-metal)' },
+    { name: 'Morado', hex: 'var(--thread-morado)' },
   ],
 };
 
@@ -616,7 +635,7 @@ if (premiumAddBtn) {
       premiumAddBtn.textContent = 'Elige una talla';
     } else {
       premiumAddBtn.disabled = false;
-      premiumAddBtn.textContent = 'Añadir a la Colección';
+      premiumAddBtn.textContent = 'Añadir al pedido';
     }
   }
 
@@ -676,7 +695,7 @@ if (premiumAddBtn) {
       image: premiumState.image,
       size: premiumState.size,
     });
-    premiumAddBtn.textContent = 'Añadida a la colección ✓';
+    premiumAddBtn.textContent = 'Añadida al pedido';
     setTimeout(updatePremiumButton, 1600);
   });
 
@@ -851,27 +870,6 @@ renderCart();
   update();
 })();
 
-// --- Revelado escalonado de las secciones de inicio ---
-(function () {
-  const blocks = document.querySelectorAll('[data-reveal]');
-  if (!blocks.length) return;
-
-  if (!window.IntersectionObserver ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    blocks.forEach((b) => b.classList.add('in-view'));
-    return;
-  }
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('in-view');
-      io.unobserve(entry.target);
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
-
-  blocks.forEach((b) => io.observe(b));
-})();
 
 // --- Altura real de la barra: alimenta --nav-h (anclajes y vista fija) ---
 (function () {
@@ -982,4 +980,40 @@ renderCart();
     const destino = document.getElementById('tab-' + link.dataset.tab);
     if (destino) setTimeout(() => hidratar(destino), 0);
   }, true);
+})();
+
+
+// --- Si sólo hay una opción, el selector no se muestra ---
+document.querySelectorAll('.config-field').forEach((field) => {
+  const group = field.querySelector('.config-fabrics, .config-sizes, .config-swatches');
+  if (!group) return;
+  const opciones = group.querySelectorAll('button');
+  if (opciones.length === 1) field.dataset.single = 'true';
+});
+
+// --- Cómo se hace: el visual fijo cambia con cada panel ---
+(function () {
+  const visual = document.querySelector('.pinned-visual');
+  const panels = document.querySelectorAll('.pinned-panel');
+  if (!visual || !panels.length || !window.IntersectionObserver) return;
+  const imgs = visual.querySelectorAll('img');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const i = Array.prototype.indexOf.call(panels, e.target);
+      imgs.forEach((img, j) => img.classList.toggle('is-active', j === i));
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  panels.forEach((panel) => io.observe(panel));
+})();
+
+// --- La barra de compra fija aparece cuando el hero ya salió de la vista ---
+(function () {
+  const bar = document.querySelector('.buy-bar');
+  const hero = document.getElementById('rotonda');
+  if (!bar || !hero) return;
+  if (!window.IntersectionObserver) { bar.classList.add('is-shown'); return; }
+  new IntersectionObserver(([e]) => {
+    bar.classList.toggle('is-shown', !e.isIntersecting);
+  }, { threshold: 0 }).observe(hero);
 })();

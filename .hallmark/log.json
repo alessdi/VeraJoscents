@@ -1,0 +1,34 @@
+[
+ {
+  "mode": "redesign",
+  "depth": "full",
+  "scope": "page",
+  "shape": "Photographic",
+  "theme": "brand",
+  "genre": "editorial",
+  "axes": "void/Cankama/oro",
+  "hero": "Poster",
+  "nav": "masthead",
+  "footer": "colophon",
+  "imagery": "user photos",
+  "photos": [],
+  "entry": "index.html",
+  "fingerprint": "photographic-poster-masthead-colophon-offer-rail-statement-pinned-rows",
+  "sections": [
+   "Poster",
+   "Offer",
+   "Rail",
+   "Statement",
+   "Pinned",
+   "Rows"
+  ],
+  "signature": "el marco dorado real sosteniendo la pieza, una vez, en la oferta",
+  "waived": [
+   "47b"
+  ],
+  "prompt": "tienda de ropa bordada de serie corta en Tijuana que vende por WhatsApp",
+  "draw": "e01d10",
+  "job": "buy",
+  "date": "2026-11-26"
+ }
+]
