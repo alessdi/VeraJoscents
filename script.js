@@ -130,6 +130,8 @@ function saveCart() {
 function renderCart() {
   const totalQty = cart.reduce((sum, it) => sum + it.qty, 0);
   cartCountEl.textContent = totalQty;
+  // como en la maqueta: sólo la bolsa mientras el pedido está vacío
+  cartCountEl.hidden = totalQty === 0;
 
   if (cart.length === 0) {
     cartItemsEl.style.display = 'none';
@@ -996,6 +998,9 @@ document.querySelectorAll('.config-field').forEach((field) => {
       if (show) n += 1;
     });
     if (count) count.textContent = n === 1 ? '1 pieza' : `${n} piezas`;
+    // el título dice lo que se está viendo: Sudaderas, Zip-Ups... o Todo
+    const titulo = document.getElementById('todo-t');
+    if (titulo) titulo.textContent = btn.textContent.trim();
   });
 })();
 
