@@ -23,8 +23,8 @@
 /* Hallmark · dismissed render · el render por file:// no puede cargar cankama.woff; las capturas por HTTP en localhost la muestran, revisadas a ojo */
 /* Hallmark · dismissed 49 · los nombres en Todo son los nombres reales de las piezas; se parten en dos líneas como máximo y no se recortan */
 /* Hallmark · answered F7 · fabric, size, cerrar y pedido son el mismo papel, un control secundario de una sola línea */
-@import url("./tokens.css");
-@import url("./base.css");
+@import url("./tokens.css?v=202611261215");
+@import url("./base.css?v=202611261215");
 
 @font-face{
   font-family:'Cankama';
