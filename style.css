@@ -1,10 +1,15 @@
 /* Hallmark · shape: Photographic · genre: editorial · theme: brand · redesign: full · job: buy
- * paper: oklch(14.1% 0.008 82) · accent: oklch(65.2% 0.107 82) · display: Cankama · body: Cormorant Garamond · hero: Poster · nav: masthead · footer: colophon · signature: el marco dorado real sosteniendo la pieza, una sola vez, en la oferta
+ * paper: oklch(14.1% 0.008 82) · accent: oklch(65.2% 0.107 82) · display: Cankama · body: Cormorant Garamond · hero: Poster · nav: edge-aligned · footer: colophon · signature: el marco dorado real sosteniendo la pintura de las ninfas, una sola vez, junto al manifiesto
  * axes: void/Cankama/oro · posture: accent as signal only · draw: e01d10 (Feature Stack y Corridor cambiados: móvil primero) · contrast: pass · fold: pass · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H5 E4 S5 R4 V4 · weakest: E, el cableado heredado son 89 ids y 80 selectores; se conservaron todos y la composición se rehizo alrededor */
-/* Hallmark · waive 47b · un solo marco, con una fotografía real de prenda dentro · el marco es la foto de un marco barroco real, la firma de Vera Joscents */
+/* Hallmark · waive 6b · el nombre y una sola acción centrados sobre el cuadro · la composición viene de la maqueta del dueño de Vera Joscents, el cuadro es material centrado */
+/* Hallmark · waive 47b · un solo marco, con la pintura real de la colección dentro · el marco es la foto de un marco barroco real, la firma de Vera Joscents */
 /* Hallmark · dropped los rótulos Museo Permanente, Sala I a V, Pieza Ancla, Cédula curatorial, Recorrido sugerido · 54 y 67 los nombran; el museo sale de las etiquetas y se queda en las palabras, el pie de lámina y el marco */
 /* Hallmark · reworded los guiones largos de la copia a comas y dos puntos · 19 los nombra */
+/* Hallmark · dropped #oferta, la barra de compra fija · el dueño pidió un inicio sólo con el propósito de la marca, sin prendas; la compra vive en las salas */
+/* Hallmark · dropped hoodienegra.webp · sale del inicio porque el inicio ya no lleva prendas; la foto sigue en la sala Hoodies */
+/* Hallmark · dropped #salas, salas, Las Salas · el dueño pidió un inicio sólo con el propósito y la calidad de la marca; las salas viven en el menú y en Todo */
+/* Hallmark · dropped fondo-movil.mp4, 2025, la frase del hero y su pie de lámina · el dueño pidió el hero de su maqueta: el cuadro, el nombre y una acción */
 /* Hallmark · dropped #concepto · el hero lleva una sola acción por la puerta 58 y la sección del manifiesto conserva su id */
 /* Hallmark · dropped ninfasmojadas.webp · era un lavado detrás del manifiesto (81) y el manifiesto ahora se sostiene sólo en tipografía */
 /* Hallmark · reworded "Perfume es Poder" to "Perfume es poder." · el manifiesto pasa a statement en el registro de la marca */
@@ -14,8 +19,8 @@
 /* Hallmark · reworded "Registro de Adquisiciones" to "Tu pedido" · el carrito habla el idioma de la compra por WhatsApp */
 /* Hallmark · reworded "Título de la pieza" to "Pieza" · marcador del modal que el script reemplaza con la pieza elegida */
 
-/* Hallmark · dismissed 69 · el precio de la oferta se repite en su barra fija por anatomía de compra, y la pestaña Camisetas es otra pantalla */
 /* Hallmark · dismissed render · el render por file:// no puede cargar cankama.woff; las capturas por HTTP en localhost la muestran, revisadas a ojo */
+/* Hallmark · dismissed 49 · los nombres en Todo son los nombres reales de las piezas; se parten en dos líneas como máximo y no se recortan */
 /* Hallmark · answered F7 · fabric, size, cerrar y pedido son el mismo papel, un control secundario de una sola línea */
 @import url("./tokens.css");
 @import url("./base.css");
@@ -81,64 +86,62 @@ a{ color:inherit; text-decoration:none; }
 .btn:disabled,.placard-cta:disabled,.size-confirm:disabled,.size-buy:disabled{ opacity:.4; cursor:not-allowed; }
 
 /* ============================================================
-   NAV · masthead
+   NAV · una línea sobre el cuadro: enlaces, el monograma al centro, la bolsa
    ============================================================ */
 .site-nav{
   position:sticky; top:0; z-index:var(--z-sticky-nav);
   background:var(--color-paper);
   border-bottom:var(--rule-hair) solid var(--color-rule);
   padding-top:env(safe-area-inset-top);
+  transition:background-color var(--dur-long) var(--ease-out), border-color var(--dur-long) var(--ease-out);
 }
 .nav-inner{
   max-width:var(--container); margin-inline:auto;
-  padding:var(--space-sm) var(--gutter) 0;
+  padding:var(--space-md) var(--gutter);
   display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
   align-items:center; column-gap:var(--space-md);
 }
-.nav-mark{ grid-column:2; grid-row:1; display:flex; justify-content:center; }
-.nav-mark-img{ height:40px; width:auto; filter:invert(1) brightness(1.28); }
-
-.nav-links{
-  grid-column:1 / -1; grid-row:2;
-  display:flex; justify-content:center; gap:var(--space-xl);
-  margin-top:var(--space-sm);
-  border-top:var(--rule-hair) solid var(--color-rule);
-}
+.nav-links{ grid-column:1; grid-row:1; display:flex; align-items:center; gap:var(--space-xl); }
 .nav-links a{
   display:inline-flex; align-items:center; min-height:44px;
-  font-family:var(--font-outlier); font-size:var(--text-sm);
-  color:var(--color-ink-2);
-  box-shadow:inset 0 -1px 0 transparent;
-  transition:color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out);
+  font-family:var(--font-display); font-size:var(--text-lg); line-height:1;
+  color:var(--color-ink);
+  transition:color var(--dur-short) var(--ease-out);
 }
-.nav-links a:hover{ color:var(--color-ink); }
-.nav-links a.is-active{ color:var(--color-accent-light); box-shadow:inset 0 -1px 0 var(--color-accent); }
-
-.nav-right{ grid-column:3; grid-row:1; justify-self:end; display:flex; align-items:center; gap:var(--space-xs); }
+.nav-links a:hover{ color:var(--color-flame); }
+.nav-links a.is-active{ color:var(--color-flame); }
+.nav-mark{ grid-column:2; grid-row:1; display:flex; align-items:center; justify-content:center; min-height:44px; min-width:44px; }
+.nav-mark-img{ height:48px; width:auto; filter:invert(1) brightness(1.28); }
+.nav-right{ grid-column:3; grid-row:1; justify-self:end; display:flex; align-items:center; gap:var(--space-2xs); }
 .nav-social{ display:flex; }
 .nav-social a{
   display:flex; align-items:center; justify-content:center; width:44px; height:44px;
-  color:var(--color-ink-2); transition:color var(--dur-short) var(--ease-out);
+  color:var(--color-ink); transition:color var(--dur-short) var(--ease-out);
 }
-.nav-social a:hover{ color:var(--color-accent-light); }
+.nav-social a:hover{ color:var(--color-flame); }
 .nav-cart{
-  display:inline-flex; align-items:center; gap:var(--space-xs);
-  min-height:44px; padding-inline:var(--space-sm);
-  background:transparent; border:var(--rule-hair) solid var(--color-rule-strong);
-  border-radius:var(--radius-card);
-  color:var(--color-ink-2); font-family:var(--font-outlier); font-size:var(--text-sm);
-  cursor:pointer; transition:border-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
-}
-.nav-cart:hover{ border-color:var(--color-accent); color:var(--color-accent-light); }
-.nav-cart:active{ transform:scale(.98); }
-.cart-icon{ flex:none; }
-.cart-count{
+  position:relative;
   display:inline-flex; align-items:center; justify-content:center;
-  min-width:20px; height:20px; padding-inline:var(--space-2xs);
+  width:44px; height:44px; padding:0;
+  background:transparent; border:0;
+  color:var(--color-ink); cursor:pointer;
+  transition:color var(--dur-short) var(--ease-out);
+}
+.nav-cart:hover{ color:var(--color-flame); }
+.nav-cart:active{ transform:scale(.96); }
+.cart-icon{ width:22px; height:22px; }
+.cart-label{ display:none; }
+.cart-count{
+  position:absolute; top:4px; right:2px;
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:18px; height:18px; padding-inline:var(--space-2xs);
   border-radius:var(--radius-pill);
   background:var(--color-oxblood); color:var(--color-ink);
-  font-size:var(--text-xs); font-variant-numeric:tabular-nums;
+  font-family:var(--font-outlier); font-size:var(--text-xs); font-variant-numeric:tabular-nums;
 }
+
+/* en el inicio la barra flota transparente sobre el cuadro hasta que se baja */
+body:has(#tab-inicio.is-active) .site-nav:not(.is-scrolled){ background:transparent; border-bottom-color:transparent; }
 
 .nav-burger{ display:none; position:relative; width:44px; height:44px; padding:0; background:transparent; border:0; cursor:pointer; }
 .burger-bar{
@@ -189,69 +192,54 @@ body.menu-open{ overflow:hidden; }
 .tab-panel.is-active{ display:block; }
 
 /* ============================================================
-   HERO · Poster
+   HERO · el cuadro a sangre, el nombre en dorado de vela, una acción
    ============================================================ */
 .rotonda{
   position:relative; isolation:isolate;
-  min-height:calc(100svh - var(--nav-h, 104px));
-  display:flex; flex-direction:column; justify-content:flex-end;
+  min-height:100svh;
+  margin-top:calc(var(--nav-h, 80px) * -1);
+  display:flex; align-items:center; justify-content:center;
+  text-align:center;
   overflow:hidden;
 }
 .rotonda-canvas{ position:absolute; inset:0; z-index:-1; }
-.rotonda-canvas video{
-  width:100%; height:100%; object-fit:cover; object-position:50% 30%;
-  filter:saturate(.7) contrast(1.06) brightness(.6);
+.rotonda-canvas img{
+  width:100%; height:100%; object-fit:cover; object-position:50% 90%;
+  filter:brightness(.62) contrast(1.05) saturate(.9);
 }
 .rotonda-canvas::after{
   content:""; position:absolute; inset:0;
-  background:linear-gradient(to top,
-    var(--color-paper) 0%,
-    color-mix(in oklab, var(--color-paper) 70%, transparent) 30%,
-    color-mix(in oklab, var(--color-paper) 15%, transparent) 70%);
+  background:
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-paper) 55%, transparent) 0%, transparent 26%),
+    radial-gradient(ellipse 70% 60% at 50% 55%, transparent 40%, color-mix(in oklab, var(--color-paper) 55%, transparent) 100%),
+    linear-gradient(to top, var(--color-paper) 0%, transparent 18%);
 }
-.rotonda-plate{
-  display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:end; gap:var(--space-3xl);
-  padding-bottom:var(--space-3xl);
-}
+.rotonda-plate{ padding-top:var(--nav-h, 80px); display:flex; flex-direction:column; align-items:center; }
 .rotonda-title{
   font-family:var(--font-display);
-  font-size:clamp(3.5rem, 8vw + 1rem, 8.5rem);
+  font-size:clamp(3.5rem, 11.5vw, 11.5rem);
   line-height:.92;
+  color:var(--color-flame);
   max-width:none;
-  margin-bottom:var(--space-lg);
+  margin-bottom:var(--space-xl);
+  text-shadow:0 2px 24px color-mix(in oklab, var(--color-paper) 70%, transparent);
 }
-.rotonda-lead{ font-size:var(--text-lead); color:var(--color-ink-2); max-width:40ch; margin-bottom:var(--space-xl); }
-.rotonda-actions{ display:flex; flex-wrap:wrap; gap:var(--space-sm); }
-.plate-caption{
-  font-family:var(--font-outlier); font-size:var(--text-sm); line-height:1.6;
-  color:var(--color-ink-2); text-align:right;
+.rotonda-actions{ display:flex; justify-content:center; }
+.btn--ghost{
+  background:transparent; color:var(--color-ink);
+  border-color:color-mix(in oklab, var(--color-ink) 70%, transparent);
+  font-family:var(--font-body); font-size:var(--text-lg);
+  min-height:48px; padding-inline:var(--space-lg);
 }
+.btn--ghost:hover{ background:transparent; border-color:var(--color-flame); color:var(--color-flame); }
 
 /* ============================================================
-   OFERTA · la firma: el marco real con la pieza dentro
+   EL MARCO · la firma: el marco real, una sola vez, con la pintura dentro
    ============================================================ */
-.offer{
-  display:grid; grid-template-columns:minmax(0,6fr) minmax(0,5fr);
-  gap:var(--space-3xl); align-items:center;
-}
-.offer-figure{ margin:0; }
-.offer-figure .frame-ornate{ max-width:560px; aspect-ratio:4/5; margin-inline:auto; }
-.offer-figure figcaption{ margin-top:var(--space-md); text-align:center; font-family:var(--font-outlier); font-size:var(--text-sm); color:var(--color-ink-2); }
-.offer-name{ font-family:var(--font-display); font-size:var(--text-section); line-height:1.02; margin-bottom:var(--space-md); }
-.offer-note{ color:var(--color-ink-2); max-width:44ch; margin-bottom:var(--space-xl); }
-.offer-facts{
-  display:grid; grid-template-columns:auto minmax(0,1fr); gap:var(--space-xs) var(--space-lg);
-  margin:0 0 var(--space-xl); padding-block:var(--space-md);
-  border-block:var(--rule-hair) solid var(--color-rule);
-  font-family:var(--font-outlier); font-size:var(--text-sm);
-}
-.offer-facts dt{ color:var(--color-ink-2); }
-.offer-facts dd{ margin:0; }
-.offer-price{ font-family:var(--font-outlier); font-size:var(--text-xl); color:var(--color-accent-light); font-variant-numeric:tabular-nums; margin-bottom:var(--space-lg); }
-
 .frame-ornate{ position:relative; }
-.offer .frame-ornate{
-  --frame-side:clamp(22px, 4vw, 44px);
+.statement-figure{ margin:0; }
+.statement-figure .frame-ornate{
+  --frame-side:clamp(22px, 3.4vw, 44px);
   border-style:solid;
   border-width:calc(var(--frame-side) * .657) var(--frame-side);
   border-image-source:url("images/marco.webp");
@@ -259,6 +247,7 @@ body.menu-open{ overflow:hidden; }
   border-image-repeat:stretch;
   background:var(--color-paper-3);
 }
+.statement-figure .frame-img{ object-fit:cover; aspect-ratio:16/9; filter:saturate(.85) contrast(1.04); }
 .frame-img{ width:100%; height:100%; object-fit:contain; }
 .corner{ display:none; }
 .frame-toggle .frame-img{ display:none; }
@@ -276,38 +265,10 @@ body.menu-open{ overflow:hidden; }
 .frame-flip:active{ transform:scale(.98); }
 
 /* ============================================================
-   RAIL · las salas, con foto y precio de entrada
-   ============================================================ */
-.rail{
-  display:grid; grid-auto-flow:column;
-  grid-auto-columns:minmax(260px, calc((100% - 3 * var(--gap-columns)) / 3.4));
-  gap:var(--gap-columns);
-  overflow-x:auto; overscroll-behavior-x:contain;
-  scroll-snap-type:x mandatory; scroll-padding-inline:var(--gutter);
-  padding-bottom:var(--space-md);
-  scrollbar-width:thin; scrollbar-color:var(--color-rule-strong) transparent;
-  /* el carril corre hasta el borde de la pantalla, más allá del contenedor */
-  margin-inline:calc(var(--gutter) * -1); padding-inline:var(--gutter);
-}
-.rail-item{ scroll-snap-align:start; display:flex; flex-direction:column; gap:var(--space-sm); }
-.rail-shot{
-  aspect-ratio:4/5; overflow:hidden;
-  background:var(--color-paper-2);
-  border:var(--rule-hair) solid var(--color-rule);
-  transition:border-color var(--dur-short) var(--ease-out);
-}
-.rail-shot img{ width:100%; height:100%; object-fit:cover; }
-.rail-name{ font-family:var(--font-display); font-size:var(--text-title); line-height:1.1; transition:color var(--dur-short) var(--ease-out); }
-.rail-desc{ color:var(--color-ink-2); font-size:var(--text-md); line-height:1.4; }
-.rail-from{ font-family:var(--font-outlier); font-size:var(--text-sm); color:var(--color-ink-2); font-variant-numeric:tabular-nums; }
-.rail-item:hover .rail-shot{ border-color:var(--color-accent); }
-.rail-item:hover .rail-name{ color:var(--color-accent-light); }
-
-/* ============================================================
    STATEMENT
    ============================================================ */
-.statement-wrap{ display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:var(--space-3xl); align-items:end; }
-.statement{ font-family:var(--font-display); font-size:clamp(3rem, 6vw + 1rem, 7.5rem); line-height:.94; max-width:10ch; }
+.statement-wrap{ display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:var(--space-3xl); align-items:center; }
+.statement{ font-family:var(--font-display); font-size:clamp(3rem, 4vw + 1rem, 6rem); line-height:.94; max-width:10ch; margin-bottom:var(--space-xl); }
 .statement-body{ color:var(--color-ink-2); max-width:46ch; }
 .statement-sign{
   margin-top:var(--space-lg); padding-top:var(--space-md);
@@ -360,23 +321,6 @@ body.menu-open{ overflow:hidden; }
 .row-links{ display:flex; flex-wrap:wrap; gap:0 var(--space-lg); }
 
 /* ============================================================
-   BARRA DE COMPRA FIJA
-   ============================================================ */
-.buy-bar{
-  position:sticky; bottom:0; z-index:var(--z-sticky);
-  background:var(--color-paper-2);
-  border-top:var(--rule-hair) solid var(--color-rule-strong);
-  padding-bottom:env(safe-area-inset-bottom);
-}
-.buy-bar-inner{ display:flex; align-items:center; justify-content:space-between; gap:var(--space-md); padding-block:var(--space-sm); }
-.buy-bar-what{ display:flex; align-items:baseline; gap:var(--space-md); min-width:0; }
-.buy-bar-name{ font-family:var(--font-display); font-size:var(--text-lg); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.buy-bar-price{ font-family:var(--font-outlier); font-size:var(--text-sm); color:var(--color-accent-light); font-variant-numeric:tabular-nums; white-space:nowrap; }
-.buy-bar .placard-cta{ flex:none; }
-.js .buy-bar{ transform:translateY(100%); opacity:0; pointer-events:none; transition:transform var(--dur-long) var(--ease-out), opacity var(--dur-short) var(--ease-out); }
-.js .buy-bar.is-shown{ transform:none; opacity:1; pointer-events:auto; }
-
-/* ============================================================
    SALAS (pestañas de producto)
    ============================================================ */
 /* el marcado de las salas no lleva .container: la sala misma lo hace */
@@ -385,11 +329,11 @@ body.menu-open{ overflow:hidden; }
 .sala-header-title{ font-family:var(--font-display); font-size:var(--text-display-s); margin-bottom:var(--space-md); }
 .sala-header-desc{ color:var(--color-ink-2); }
 
-.obras-grid{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:var(--space-3xl) var(--gap-columns); }
-.obras-grid--single{ grid-template-columns:minmax(0,1fr); }
+.obras-grid{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--space-3xl) var(--gap-columns); }
+.obras-grid--single{ grid-template-columns:repeat(3, minmax(0,1fr)); }
 .obras-grid--spaced{ margin-top:var(--space-3xl); }
 .obra{ display:flex; flex-direction:column; min-width:0; }
-.obra--wide{ grid-column:1 / -1; }
+.obra--wide{ grid-column:auto; }
 
 .obra-wall,
 .obra-wall-clean{
@@ -399,19 +343,22 @@ body.menu-open{ overflow:hidden; }
   border:var(--rule-hair) solid var(--color-rule);
   display:flex; align-items:center; justify-content:center;
 }
-.obra-wall{ padding:var(--space-xl); }
+.obra-wall{ padding:var(--space-lg); }
 .obra-wall .frame-ornate{ width:100%; height:100%; }
 .obra-wall-clean img{ width:100%; height:100%; object-fit:cover; }
 .obra-nymph{ display:none; }
 
 .placard{ padding-top:var(--space-lg); display:flex; flex-direction:column; }
+.placard > *{ order:3; }
+.placard > .placard-title{ order:1; }
+.placard > .placard-row{ order:2; }
+.placard > .placard-cta{ order:4; margin-top:var(--space-xs); }
 .placard-title{ font-family:var(--font-display); font-size:var(--text-title); line-height:1.15; margin-bottom:var(--space-2xs); }
 .placard-meta{ font-family:var(--font-outlier); font-size:var(--text-sm); color:var(--color-ink-2); margin-bottom:var(--space-md); }
 .placard-desc{ color:var(--color-ink-2); margin-bottom:var(--space-lg); max-width:52ch; }
 .placard-row{
-  display:flex; align-items:baseline; justify-content:space-between; gap:var(--space-sm);
-  padding-top:var(--space-sm); margin-bottom:var(--space-md);
-  border-top:var(--rule-hair) solid var(--color-rule);
+  display:flex; align-items:baseline; gap:var(--space-sm);
+  margin-bottom:var(--space-md);
   font-family:var(--font-outlier); font-size:var(--text-sm);
 }
 .placard-ed{ color:var(--color-ink-2); }
@@ -446,6 +393,54 @@ body.menu-open{ overflow:hidden; }
 .config-gallery-row img:hover{ border-color:var(--color-accent); }
 .config-gallery-row img.is-hidden{ display:none; }
 .config-note{ padding-top:var(--space-sm); font-family:var(--font-outlier); font-size:var(--text-sm); color:var(--color-ink-2); }
+
+/* ============================================================
+   TODO · todas las piezas, con filtro por tipo
+   Rejilla densa, la prenda flota sobre el papel; nada compite con ella.
+   ============================================================ */
+.todo-bar{
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  gap:var(--space-sm) var(--space-lg);
+  margin-bottom:var(--space-2xl);
+  border-bottom:var(--rule-hair) solid var(--color-rule);
+}
+.filtros{ display:flex; flex-wrap:wrap; gap:0 var(--space-xs); }
+.filtro{
+  min-height:44px; padding-inline:var(--space-sm);
+  background:transparent; border:0; border-radius:0;
+  box-shadow:inset 0 -1px 0 transparent;
+  color:var(--color-ink-2);
+  font-family:var(--font-outlier); font-size:var(--text-sm);
+  cursor:pointer;
+  transition:color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out);
+}
+.filtro:hover{ color:var(--color-ink); }
+.filtro[aria-pressed="true"]{ color:var(--color-accent-light); box-shadow:inset 0 -1px 0 var(--color-accent); }
+.filtro:active{ transform:scale(.98); }
+.todo-count{ font-family:var(--font-outlier); font-size:var(--text-sm); color:var(--color-ink-2); font-variant-numeric:tabular-nums; }
+
+.todo-grid{
+  list-style:none; margin:0; padding:0;
+  display:grid; grid-template-columns:repeat(6, minmax(0,1fr));
+  gap:var(--space-2xl) var(--gap-columns);
+}
+.todo-link{
+  width:100%; padding:0; background:transparent; border:0; color:inherit; font:inherit; cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; gap:var(--space-2xs); text-align:center;
+}
+.todo-link:active .todo-shot{ transform:scale(.99); }
+.todo-shot{
+  width:100%; aspect-ratio:4/5; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:var(--space-sm);
+  transition:transform var(--dur-long) var(--ease-out);
+}
+.todo-shot img{ width:100%; height:100%; object-fit:contain; }
+/* las fotos montadas en marco: el encuadre se acerca a la prenda y deja fuera el marco */
+.todo-shot--foto img{ object-fit:cover; object-position:50% 46%; transform:scale(1.46); }
+.todo-name{ font-family:var(--font-outlier); font-size:var(--text-sm); color:var(--color-ink); line-height:1.3; transition:color var(--dur-short) var(--ease-out); }
+.todo-link:hover .todo-name{ color:var(--color-accent-light); }
+.todo-link:hover .todo-shot{ transform:translateY(-4px); }
 
 /* ============================================================
    CONFIGURADOR
@@ -585,7 +580,18 @@ body.cart-open{ overflow:hidden; }
 }
 .size-modal.is-open{ opacity:1; pointer-events:auto; transform:translate(-50%, -50%); }
 .size-modal-close{ position:absolute; top:var(--space-sm); right:var(--space-sm); }
-.size-modal-title{ font-family:var(--font-display); font-size:var(--text-xl); line-height:1.15; padding-right:var(--space-2xl); margin-bottom:var(--space-lg); }
+.size-modal{ max-height:calc(100svh - var(--space-xl)); overflow-y:auto; overscroll-behavior:contain; }
+.size-modal-figure{ margin:0 0 var(--space-md); display:flex; justify-content:center; }
+.size-modal-figure img{ width:auto; max-width:100%; height:clamp(180px, 32svh, 300px); object-fit:contain; }
+.size-modal-title{ font-family:var(--font-display); font-size:var(--text-xl); line-height:1.15; padding-right:var(--space-2xl); margin-bottom:var(--space-2xs); }
+.size-modal-price{ font-family:var(--font-outlier); font-size:var(--text-lg); color:var(--color-accent-light); font-variant-numeric:tabular-nums; margin-bottom:var(--space-lg); }
+.size-modal-more{
+  display:flex; align-items:center; justify-content:center; min-height:44px; margin-top:var(--space-xs);
+  font-family:var(--font-outlier); font-size:var(--text-sm); color:var(--color-ink-2);
+  text-decoration:underline; text-decoration-color:var(--color-rule-strong); text-underline-offset:.22em;
+  transition:color var(--dur-short) var(--ease-out);
+}
+.size-modal-more:hover{ color:var(--color-accent-light); }
 .size-legend{ font-family:var(--font-outlier); font-size:var(--text-sm); color:var(--color-ink-2); margin-bottom:var(--space-sm); }
 .size-options{ display:flex; flex-wrap:wrap; gap:var(--space-xs); margin-bottom:var(--space-sm); }
 .size-btn{ min-width:56px; min-height:52px; }
@@ -616,32 +622,28 @@ body.size-modal-open{ overflow:hidden; }
 .footer-colophon a:hover,.footer-colophon a.is-active{ color:var(--color-accent-light); }
 .footer-fine{ margin-top:var(--space-lg); font-family:var(--font-outlier); font-size:var(--text-sm); color:var(--color-muted); }
 
-@media (min-width:64rem){
-  .rail{ grid-auto-flow:row; grid-template-columns:repeat(5, minmax(0,1fr)); overflow:visible; margin-inline:0; padding-inline:0; padding-bottom:0; }
-}
-
 /* ============================================================
    ≤ 60rem
    ============================================================ */
 @media (max-width:60rem){
-  .nav-inner{ grid-template-columns:auto minmax(0,1fr) auto; padding-bottom:var(--space-sm); }
+  .nav-inner{ grid-template-columns:auto minmax(0,1fr) auto; padding-block:var(--space-sm); }
   .nav-mark{ grid-column:1; justify-content:flex-start; }
-  .nav-mark-img{ height:32px; }
+  .nav-mark-img{ height:36px; }
   .nav-links{ display:none; }
   .nav-burger{ display:block; }
   .nav-social{ display:none; }
   .cart-label{ display:none; }
 
-  .rotonda-plate{ grid-template-columns:minmax(0,1fr); gap:var(--space-lg); padding-bottom:var(--space-2xl); }
-  .plate-caption{ text-align:left; }
+  /* en vertical el cuadro enseña al jinete con el cáliz y a las ninfas */
+  .rotonda-canvas img{ object-position:50% 58%; }
 
-  .offer,.statement-wrap,.pinned{ grid-template-columns:minmax(0,1fr); gap:var(--space-2xl); }
+  .statement-wrap,.pinned{ grid-template-columns:minmax(0,1fr); gap:var(--space-2xl); }
   .pinned-visual{ display:none; }
   .pinned-panel{ min-height:0; padding-block:var(--space-xl); }
   .pinned-panel img{ display:block; width:100%; aspect-ratio:4/3; object-fit:cover; margin-bottom:var(--space-lg); border:var(--rule-hair) solid var(--color-rule); }
-  .rail{ grid-auto-columns:minmax(220px, 70%); }
   .row{ grid-template-columns:minmax(0,1fr); gap:var(--space-sm); }
-  .obras-grid{ grid-template-columns:minmax(0,1fr); }
+  .obras-grid,.obras-grid--single{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:var(--space-2xl) var(--gap-columns); }
+  .todo-grid{ grid-template-columns:repeat(3, minmax(0,1fr)); }
 
   /* configurador: la prenda queda anclada bajo la barra mientras se eligen las opciones */
   .config-layout{ display:flex; flex-direction:column; align-items:stretch; gap:0; }
@@ -668,15 +670,11 @@ body.size-modal-open{ overflow:hidden; }
    ============================================================ */
 @media (max-width:40rem){
   body{ font-size:var(--text-md); }
-  .rotonda{ min-height:calc(100svh - var(--nav-h, 64px)); }
-  .rotonda-title{ font-size:clamp(3.25rem, 17vw, 5rem); }
-  /* sin script la barra fija ocupa el pie de la primera pantalla */
-  html:not(.js) .rotonda-plate{ padding-bottom:calc(var(--space-xl) + var(--space-3xl)); }
-  .rotonda-actions .btn{ width:100%; }
-  .offer-figure .frame-ornate{ max-width:340px; }
-  .buy-bar-what{ flex-direction:column; gap:0; }
-  .buy-bar-name{ font-size:var(--text-md); }
-  .buy-bar .placard-cta{ padding-inline:var(--space-lg); }
+  .rotonda-title{ font-size:clamp(3.5rem, 19vw, 5.5rem); }
+  .obras-grid,.obras-grid--single{ grid-template-columns:minmax(0,1fr); }
+  .todo-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:var(--space-xl) var(--space-md); }
+  .todo-bar{ margin-bottom:var(--space-xl); }
+  .filtro{ padding-inline:var(--space-xs); }
   .obra-wall{ padding:var(--space-md); }
   .config-gallery-row{ grid-template-columns:repeat(3, minmax(0,1fr)); }
   .footer-motto{ font-size:var(--text-2xl); }
@@ -688,6 +686,5 @@ body.size-modal-open{ overflow:hidden; }
 }
 
 @media (hover:none){
-  .rail-item:hover .rail-shot{ border-color:var(--color-rule); }
-  .rail-item:hover .rail-name{ color:inherit; }
+  .todo-link:hover .todo-shot{ transform:none; }
 }

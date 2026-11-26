@@ -37,7 +37,7 @@
 
 <!-- Tipografía de marca: se precarga para que el título no parpadee -->
 <link rel="preload" href="fonts/cankama.woff" as="font" type="font/woff" crossorigin>
-<link rel="preload" href="images/fondo-movil-poster.webp" as="image" fetchpriority="high">
+<link rel="preload" href="images/cuadro-napoleon.webp" as="image" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
@@ -54,13 +54,11 @@
     <a href="#" data-tab="inicio" class="nav-mark" aria-label="Vera Joscents, inicio">
       <img src="images/logob.webp" alt="" class="nav-mark-img" width="1103" height="1200" fetchpriority="high" decoding="async">
     </a>
-    <nav class="nav-links">
+    <nav class="nav-links" aria-label="Principal">
       <a href="#" data-tab="inicio" class="is-active">Inicio</a>
-      <a href="#" data-tab="camisetas">Camisetas</a>
-      <a href="#" data-tab="sudaderas">Sudaderas</a>
-      <a href="#" data-tab="zip">Zip-Ups</a>
-      <a href="#" data-tab="hoodies">Hoodies</a>
+      <a href="#" data-tab="todo">Todo</a>
       <a href="#" data-tab="personalizable">Personalizable</a>
+      <a href="#visitas">Contacto</a>
     </nav>
     <div class="nav-right">
       <div class="nav-social">
@@ -94,6 +92,10 @@
         <span class="nm-name">Inicio</span>
         <span class="nm-desc">La colección 33</span>
       </a>
+      <a href="#" data-tab="todo">
+        <span class="nm-name">Todo</span>
+        <span class="nm-desc">Todas las piezas, con filtro</span>
+      </a>
       <a href="#" data-tab="camisetas">
         <span class="nm-name">Camisetas</span>
         <span class="nm-desc">Retratos sobre algodón</span>
@@ -126,95 +128,27 @@
 <!-- ================= ROTONDA / HERO ================= -->
 <div class="tab-panel is-active" id="tab-inicio" data-tab-panel="inicio">
 <section class="rotonda" id="rotonda" aria-labelledby="rotonda-t">
-  <div class="rotonda-canvas" aria-hidden="true">
-    <video muted loop playsinline preload="none"
-           poster="images/fondo-movil-poster.webp"
-           data-src="images/fondo-movil.mp4"></video>
+  <div class="rotonda-canvas">
+    <img src="images/cuadro-napoleon.webp" alt="Pintura de Vera Joscents: un jinete alza el cáliz VJ entre humo dorado mientras tres ninfas lo miran desde abajo" width="1611" height="2000" fetchpriority="high" decoding="async">
   </div>
   <div class="container rotonda-plate">
-    <div>
-      <h1 class="rotonda-title" id="rotonda-t">Vera Joscents</h1>
-      <p class="rotonda-lead">Las Ninfas de la Perfumería: prendas bordadas y numeradas, hechas en Tijuana.</p>
-      <div class="rotonda-actions">
-        <a href="#oferta" class="btn">Ver la pieza</a>
-      </div>
+    <h1 class="rotonda-title" id="rotonda-t">Vera Joscents</h1>
+    <div class="rotonda-actions">
+      <a href="#" data-tab="todo" class="btn btn--ghost">Comprar ahora</a>
     </div>
-    <p class="plate-caption">Colección Cápsula Nº 33<br>Tijuana, desde 2025</p>
   </div>
 </section>
 
-<section class="section" id="oferta" aria-labelledby="oferta-t">
-  <div class="container offer">
-    <figure class="offer-figure">
-      <div class="frame-ornate frame-toggle">
-        <img src="images/bfronty.webp" alt="Las Ninfas en Disputa, camiseta negra, frente con el sello Ouroboros" class="frame-img is-active" width="1200" height="1049" loading="lazy" decoding="async">
-        <img src="images/bbacky.webp" alt="Las Ninfas en Disputa, camiseta negra, espalda con la pintura de las ninfas" class="frame-img" width="1200" height="1059" loading="lazy" decoding="async">
-        <button class="frame-flip" type="button" aria-label="Ver el reverso de la pieza">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 1 2.6 6.1"/><path d="M3.2 19.2v-5h5"/></svg>
-            <span>Girar</span>
-          </button>
+
+<section class="section section--paper2" id="concepto" aria-labelledby="concepto-t">
+  <div class="container statement-wrap">
+    <figure class="statement-figure">
+      <div class="frame-ornate">
+        <img src="images/fondo-poster.webp" alt="Las ninfas junto al estanque con los frascos de perfume, la pintura que da nombre a la colección" class="frame-img" width="1200" height="675" loading="lazy" decoding="async">
       </div>
-      <figcaption>Frente y espalda, Edición 33</figcaption>
     </figure>
     <div>
-      <h2 class="offer-name" id="oferta-t">Las Ninfas en Disputa</h2>
-      <p class="offer-note">Ninfas se disputan el perfume eterno, símbolo del deseo y la fragilidad del tiempo.</p>
-      <dl class="offer-facts">
-        <dt>Pieza</dt><dd>Camiseta</dd>
-        <dt>Tela</dt><dd>Algodón pesado, 240gsm</dd>
-        <dt>Tallas</dt><dd>S, M, L, XL</dd>
-      </dl>
-      <p class="offer-price">$890 MXN</p>
-      <button class="placard-cta" type="button" data-title="Las Ninfas en Disputa" data-meta="Camiseta, algodón pesado 240gsm" data-price="890" data-image="images/bfronty.webp">Comprar</button>
-    </div>
-  </div>
-</section>
-
-<section class="section section--paper2" id="salas" aria-labelledby="salas-t">
-  <div class="container">
-    <div class="head-block">
-      <h2 id="salas-t">Las salas</h2>
-      <p class="lead">Cinco salas, una colección. Cada pieza, numerada.</p>
-    </div>
-    <div class="rail" role="list">
-      <a href="#" data-tab="camisetas" class="rail-item">
-        <span class="rail-shot"><img src="images/ornamentthisrt1.webp" alt="" width="1200" height="1029" loading="lazy" decoding="async"></span>
-        <span class="rail-name">Camisetas</span>
-        <span class="rail-desc">Retratos íntimos sobre algodón peinado.</span>
-        <span class="rail-from">desde $890 MXN</span>
-      </a>
-      <a href="#" data-tab="sudaderas" class="rail-item">
-        <span class="rail-shot"><img src="images/sueterfront.webp" alt="" width="1088" height="1200" loading="lazy" decoding="async"></span>
-        <span class="rail-name">Sudaderas</span>
-        <span class="rail-desc">Frescos murales para la vida diaria.</span>
-        <span class="rail-from">desde $1,450 MXN</span>
-      </a>
-      <a href="#" data-tab="zip" class="rail-item">
-        <span class="rail-shot"><img src="images/ouroboros1.webp" alt="" width="965" height="1200" loading="lazy" decoding="async"></span>
-        <span class="rail-name">Zip-Ups</span>
-        <span class="rail-desc">Retablos que se abren al centro.</span>
-        <span class="rail-from">desde $1,690 MXN</span>
-      </a>
-      <a href="#" data-tab="hoodies" class="rail-item">
-        <span class="rail-shot"><img src="images/hoodienegra.webp" alt="" width="993" height="1200" loading="lazy" decoding="async"></span>
-        <span class="rail-name">Hoodies</span>
-        <span class="rail-desc">Óleo oscuro, capucha como marco.</span>
-        <span class="rail-from">desde $1,590 MXN</span>
-      </a>
-      <a href="#" data-tab="personalizable" class="rail-item">
-        <span class="rail-shot"><img src="images/config-blanco.webp" alt="" width="900" height="1178" loading="lazy" decoding="async"></span>
-        <span class="rail-name">Personalizable</span>
-        <span class="rail-desc">El bordado se hace a su medida.</span>
-        <span class="rail-from">desde $1,450 MXN</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="concepto" aria-labelledby="concepto-t">
-  <div class="container statement-wrap">
-    <h2 class="statement" id="concepto-t">Perfume es poder.</h2>
-    <div>
+      <h2 class="statement" id="concepto-t">Perfume es poder.</h2>
       <p class="statement-body">Tomamos a los maestros del claroscuro y los intervenimos con el lenguaje de la perfumería: cristal tallado, sellos de cera, blasones. La ninfa ya no sostiene el agua; sostiene el frasco.</p>
       <p class="statement-sign">Vera Joscents, curador y fundador</p>
     </div>
@@ -251,12 +185,98 @@
   </div>
 </section>
 
-<div class="buy-bar" aria-label="Compra rápida">
-  <div class="container buy-bar-inner">
-    <p class="buy-bar-what"><span class="buy-bar-name">Las Ninfas en Disputa</span><span class="buy-bar-price">$890 MXN</span></p>
-    <button class="placard-cta" type="button" data-title="Las Ninfas en Disputa" data-meta="Camiseta, algodón pesado 240gsm" data-price="890" data-image="images/bfronty.webp">Comprar</button>
-  </div>
 </div>
+
+<div class="tab-panel" id="tab-todo" data-tab-panel="todo">
+<section class="sala" id="sala-todo" aria-labelledby="todo-t">
+  <div class="sala-header">
+    <h2 class="sala-header-title" id="todo-t">Todo</h2>
+  </div>
+  <div class="todo-bar">
+    <div class="filtros" role="toolbar" aria-label="Filtrar por tipo de prenda">
+      <button type="button" class="filtro" data-filtro="todo" aria-pressed="true">Todo</button>
+      <button type="button" class="filtro" data-filtro="camisetas" aria-pressed="false">Camisetas</button>
+      <button type="button" class="filtro" data-filtro="sudaderas" aria-pressed="false">Sudaderas</button>
+      <button type="button" class="filtro" data-filtro="zip" aria-pressed="false">Zip-Ups</button>
+      <button type="button" class="filtro" data-filtro="hoodies" aria-pressed="false">Hoodies</button>
+    </div>
+    <p class="todo-count" aria-live="polite">12 piezas</p>
+  </div>
+  <ul class="todo-grid" role="list">
+      <li class="todo-item" data-cat="camisetas">
+        <button type="button" class="todo-link" data-sala="camisetas" data-quick="pieza-las-ninfas-en-disputa">
+          <span class="todo-shot"><img data-src="images/bfronty.webp" alt="" width="1200" height="1049" loading="lazy" decoding="async"></span>
+          <span class="todo-name">Las Ninfas en Disputa</span>
+        </button>
+      </li>
+      <li class="todo-item" data-cat="camisetas">
+        <button type="button" class="todo-link" data-sala="camisetas" data-quick="pieza-blason-de-tijuana">
+          <span class="todo-shot"><img data-src="images/ornamentthisrt1.webp" alt="" width="1200" height="1029" loading="lazy" decoding="async"></span>
+          <span class="todo-name">Blasón de Tijuana</span>
+        </button>
+      </li>
+      <li class="todo-item" data-cat="camisetas">
+        <button type="button" class="todo-link" data-sala="camisetas" data-quick="pieza-el-sello-intimo">
+          <span class="todo-shot todo-shot--foto"><img data-src="images/crest-clean/sello-rojo-tee.webp" alt="" width="960" height="1200" loading="lazy" decoding="async"></span>
+          <span class="todo-name">El Sello Íntimo</span>
+        </button>
+      </li>
+      <li class="todo-item" data-cat="camisetas">
+        <button type="button" class="todo-link" data-sala="camisetas" data-quick="pieza-escudo-heraldico-de-dragones">
+          <span class="todo-shot todo-shot--foto"><img data-src="images/dragones/negra.webp" alt="" width="960" height="1200" loading="lazy" decoding="async"></span>
+          <span class="todo-name">Escudo Heráldico de Dragones</span>
+        </button>
+      </li>
+      <li class="todo-item" data-cat="camisetas">
+        <button type="button" class="todo-link" data-sala="camisetas" data-quick="pieza-vj-elemental-cromatico">
+          <span class="todo-shot todo-shot--foto"><img data-src="images/elemental-tee/negra-colores.webp" alt="" width="900" height="1200" loading="lazy" decoding="async"></span>
+          <span class="todo-name">VJ Elemental Cromático</span>
+        </button>
+      </li>
+      <li class="todo-item" data-cat="sudaderas">
+        <button type="button" class="todo-link" data-sala="sudaderas" data-quick="pieza-le-parfum-est-le-pouvoir">
+          <span class="todo-shot"><img data-src="images/sueterfront.webp" alt="" width="1088" height="1200" loading="lazy" decoding="async"></span>
+          <span class="todo-name">Le Parfum est le Pouvoir</span>
+        </button>
+      </li>
+      <li class="todo-item" data-cat="zip">
+        <button type="button" class="todo-link" data-sala="zip" data-quick="pieza-el-guardian-del-ciclo">
+          <span class="todo-shot"><img data-src="images/ouroboros1.webp" alt="" width="965" height="1200" loading="lazy" decoding="async"></span>
+          <span class="todo-name">El Guardián del Ciclo</span>
+        </button>
+      </li>
+      <li class="todo-item" data-cat="zip">
+        <button type="button" class="todo-link" data-sala="zip" data-quick="pieza-ofrenda-a-dos-manos">
+          <span class="todo-shot"><img data-src="images/zipupdosninfas.webp" alt="" width="965" height="1200" loading="lazy" decoding="async"></span>
+          <span class="todo-name">Ofrenda a Dos Manos</span>
+        </button>
+      </li>
+      <li class="todo-item" data-cat="zip">
+        <button type="button" class="todo-link" data-sala="zip" data-quick="pieza-astros-y-esencias">
+          <span class="todo-shot"><img data-src="images/zipupninfas.webp" alt="" width="965" height="1200" loading="lazy" decoding="async"></span>
+          <span class="todo-name">Astros y Esencias</span>
+        </button>
+      </li>
+      <li class="todo-item" data-cat="zip">
+        <button type="button" class="todo-link" data-sala="zip" data-quick="pieza-el-concilio-de-las-fragancias">
+          <span class="todo-shot"><img data-src="images/zipupdual.webp" alt="" width="965" height="1200" loading="lazy" decoding="async"></span>
+          <span class="todo-name">El Concilio de las Fragancias</span>
+        </button>
+      </li>
+      <li class="todo-item" data-cat="hoodies">
+        <button type="button" class="todo-link" data-sala="hoodies" data-quick="pieza-la-mira">
+          <span class="todo-shot"><img data-src="images/hoodienegra.webp" alt="" width="993" height="1200" loading="lazy" decoding="async"></span>
+          <span class="todo-name">La Mira</span>
+        </button>
+      </li>
+      <li class="todo-item" data-cat="hoodies">
+        <button type="button" class="todo-link" data-sala="hoodies" data-quick="pieza-el-sello">
+          <span class="todo-shot todo-shot--foto"><img data-src="images/crest-clean/sello-dorado-hoodie.webp" alt="" width="973" height="1200" loading="lazy" decoding="async"></span>
+          <span class="todo-name">El Sello</span>
+        </button>
+      </li>
+  </ul>
+</section>
 </div>
 
 <div class="tab-panel" id="tab-camisetas" data-tab-panel="camisetas">
@@ -269,7 +289,7 @@
   <div class="obras-grid">
 
     <!-- Obra 1: Tee negra front/back -->
-    <article class="obra" data-price="890">
+    <article id="pieza-las-ninfas-en-disputa" class="obra" data-price="890">
       <div class="obra-wall">
         <div class="frame-ornate frame-toggle">
           <img data-src="images/bfronty.webp" alt="Camiseta Vera Joscents, vista frontal, sello ouroboros" class="frame-img is-active" data-view="front" width="1200" height="1049" loading="lazy" decoding="async">
@@ -282,13 +302,7 @@
       </div>
       <div class="placard">
         <p class="placard-title">“Las Ninfas en Disputa”</p>
-        <p class="placard-meta">Camiseta, Algodón pesado 240gsm</p>
-        <p class="placard-desc">
-          Ninfas se disputan el perfume eterno, símbolo del deseo y la fragilidad del tiempo.
-          El aroma se derrama como promesa efímera mientras la belleza se congela en el instante.
-        </p>
         <div class="placard-row">
-          <span class="placard-ed">Edición 33</span>
           <span class="placard-price">$890 MXN</span>
         </div>
         <button class="placard-cta" data-title="Las Ninfas en Disputa" data-meta="Camiseta &middot; Algod&oacute;n pesado 240gsm" data-price="890" data-image="images/bfronty.webp">Comprar</button>
@@ -296,7 +310,7 @@
     </article>
 
     <!-- Obra 2: Tee blanca -->
-    <article class="obra" data-price="890">
+    <article id="pieza-blason-de-tijuana" class="obra" data-price="890">
       <div class="obra-wall obra-wall--light">
         <div class="frame-ornate">
           <img data-src="images/ornamentthisrt1.webp" alt="Camiseta blanca Vera Joscents, escudo ornamental Tijuana" class="frame-img" width="1200" height="1029" loading="lazy" decoding="async">
@@ -304,30 +318,19 @@
       </div>
       <div class="placard">
         <p class="placard-title">“Blasón de Tijuana”</p>
-        <p class="placard-meta">Camiseta, Algodón peinado, blanco marfil</p>
-        <p class="placard-desc">
-          El escudo de la casa, grabado a la manera de un exlibris del siglo XVII.
-          Declaración de origen: perfume es poder desde 2025.
-        </p>
         <div class="placard-row">
-          <span class="placard-ed">Edición 33</span>
           <span class="placard-price">$890 MXN</span>
         </div>
         <button class="placard-cta" data-title="Blas&oacute;n de Tijuana" data-meta="Camiseta &middot; Algod&oacute;n peinado, blanco marfil" data-price="890" data-image="images/ornamentthisrt1.webp">Comprar</button>
       </div>
     </article>
 
-    <article class="obra" data-price="1850">
+    <article id="pieza-el-sello-intimo" class="obra" data-price="1850">
       <div class="obra-wall-clean">
         <img id="selloRojoMainImg" data-src="images/crest-clean/sello-rojo-tee.webp" alt="El Sello Íntimo, camiseta negra, bordado al pecho" class="gallery-main-img" width="960" height="1200" loading="lazy" decoding="async">
       </div>
       <div class="placard">
         <p class="placard-title">“El Sello Íntimo”</p>
-        <p class="placard-meta">Camiseta, Algodón pesado 260gsm</p>
-        <p class="placard-desc">
-          El Ouroboros bordado al pecho, la misma guardia, en formato íntimo. El bordado puede
-          colocarse del lado del pecho o centrado en medio, según la variante elegida.
-        </p>
 
         <div class="config-field">
           <span class="config-field-label">Variantes: <em id="selloRojoVariantName">Rojo</em></span>
@@ -359,7 +362,6 @@
         </div>
 
         <div class="placard-row">
-          <span class="placard-ed">Edición 33</span>
           <span class="placard-price">$1,850 MXN</span>
         </div>
         <button class="placard-cta" id="selloRojoAddBtn" data-title="El Sello Íntimo" data-meta="Camiseta · Algodón pesado 260gsm" data-price="1850" data-image="images/crest-clean/sello-rojo-tee.webp">Comprar</button>
@@ -367,17 +369,12 @@
     </article>
 
   
-    <article class="obra" data-price="1850">
+    <article id="pieza-escudo-heraldico-de-dragones" class="obra" data-price="1850">
       <div class="obra-wall-clean">
         <img data-src="images/dragones/negra.webp" alt="Escudo Heráldico de Dragones VJ, camiseta negra" class="gallery-main-img" width="960" height="1200" loading="lazy" decoding="async">
       </div>
       <div class="placard">
         <p class="placard-title">“Escudo Heráldico de Dragones”</p>
-        <p class="placard-meta">Camiseta, Algodón pesado 260gsm</p>
-        <p class="placard-desc">
-          Dos dragones custodian el monograma VJ entre flores de lis y el número 33, una composición
-          inspirada en la heráldica clásica, reinterpretada bajo el lenguaje de Vera Joscents.
-        </p>
 
         <div class="obra-gallery">
           <button class="config-gallery-toggle" type="button" aria-expanded="false">
@@ -417,26 +414,19 @@
         </div>
 
         <div class="placard-row">
-          <span class="placard-ed">Edición 33</span>
           <span class="placard-price">$1,850 MXN</span>
         </div>
         <button class="placard-cta" data-title="Escudo Heráldico de Dragones" data-meta="Camiseta · Algodón pesado 260gsm" data-price="1850" data-image="images/dragones/negra.webp">Comprar</button>
       </div>
     </article>
-    <article class="obra" data-price="890">
+    <article id="pieza-vj-elemental-cromatico" class="obra" data-price="890">
       <div class="obra-wall-clean">
         <img data-src="images/elemental-tee/negra-colores.webp" alt="VJ Elemental, camiseta negra bordado a colores" class="gallery-main-img" width="900" height="1200" loading="lazy" decoding="async">
       </div>
       <div class="placard">
         <p class="placard-title">“VJ Elemental Cromático”</p>
-        <p class="placard-meta">Camiseta, Algodón pesado 260gsm</p>
-        <p class="placard-desc">
-          El monograma VJ en su versión más lúdica, hilos de color sobre algodón negro,
-          acompañado de pequeñas cruces bordadas y el número 33.
-        </p>
 
         <div class="placard-row">
-          <span class="placard-ed">Edición 33</span>
           <span class="placard-price">$890 MXN</span>
         </div>
         <button class="placard-cta" data-title="VJ Elemental Cromático" data-meta="Camiseta · Algodón pesado 260gsm" data-price="890" data-image="images/elemental-tee/negra-colores.webp">Comprar</button>
@@ -455,7 +445,7 @@
   </div>
 
   <div class="obras-grid obras-grid--single">
-    <article class="obra obra--wide" data-price="1450">
+    <article id="pieza-le-parfum-est-le-pouvoir" class="obra obra--wide" data-price="1450">
       <div class="obra-wall">
         <div class="frame-ornate">
           <img data-src="images/sueterfront.webp" alt="Sudadera Vera Joscents, catedral gótica y ninfas entre nubes" class="frame-img" width="1088" height="1200" loading="lazy" decoding="async">
@@ -463,13 +453,7 @@
       </div>
       <div class="placard placard--wide">
         <p class="placard-title">“Le Parfum est le Pouvoir”</p>
-        <p class="placard-meta">Sudadera cuello redondo, Felpa francesa 400gsm</p>
-        <p class="placard-desc">
-          Bajo una catedral en llamas, tres ninfas descienden entre nubes portando el frasco sagrado.
-          Inscripción bilingüe recorriendo las mangas como una letanía: el perfume es el poder.
-        </p>
         <div class="placard-row">
-          <span class="placard-ed">Edición 33</span>
           <span class="placard-price">$1,450 MXN</span>
         </div>
         <button class="placard-cta" data-title="Le Parfum est le Pouvoir" data-meta="Sudadera cuello redondo" data-price="1450" data-image="images/sueterfront.webp">Comprar</button>
@@ -488,7 +472,7 @@
 
   <div class="obras-grid">
 
-    <article class="obra" data-price="1690">
+    <article id="pieza-el-guardian-del-ciclo" class="obra" data-price="1690">
       <div class="obra-wall">
         <div class="frame-ornate">
           <img data-src="images/ouroboros1.webp" alt="Zip-up negro, guerrero con serpiente ouroboros y lanza" class="frame-img" width="965" height="1200" loading="lazy" decoding="async">
@@ -496,20 +480,14 @@
       </div>
       <div class="placard">
         <p class="placard-title">“El Guardián del Ciclo”</p>
-        <p class="placard-meta">Zip-Up, Felpa pesada, forro cepillado</p>
-        <p class="placard-desc">
-          Un guerrero sostiene la lanza bajo el ouroboros en llamas, el aroma que se consume y renace
-          eternamente sobre sí mismo.
-        </p>
         <div class="placard-row">
-          <span class="placard-ed">Edición 33</span>
           <span class="placard-price">$1,690 MXN</span>
         </div>
         <button class="placard-cta" data-title="El Guardi&aacute;n del Ciclo" data-meta="Zip-Up &middot; Felpa pesada" data-price="1690" data-image="images/ouroboros1.webp">Comprar</button>
       </div>
     </article>
 
-    <article class="obra" data-price="1690">
+    <article id="pieza-ofrenda-a-dos-manos" class="obra" data-price="1690">
       <div class="obra-wall">
         <div class="frame-ornate">
           <img data-src="images/zipupdosninfas.webp" alt="Zip-up negro, dos ninfas sosteniendo un frasco dorado" class="frame-img" width="965" height="1200" loading="lazy" decoding="async">
@@ -517,20 +495,14 @@
       </div>
       <div class="placard">
         <p class="placard-title">“Ofrenda a Dos Manos”</p>
-        <p class="placard-meta">Zip-Up, Felpa pesada, forro cepillado</p>
-        <p class="placard-desc">
-          Simetría devocional: dos ninfas elevan un mismo frasco tallado como quien sostiene una reliquia.
-          El cierre divide la escena en espejo.
-        </p>
         <div class="placard-row">
-          <span class="placard-ed">Edición 33</span>
           <span class="placard-price">$1,690 MXN</span>
         </div>
         <button class="placard-cta" data-title="Ofrenda a Dos Manos" data-meta="Zip-Up &middot; Felpa pesada" data-price="1690" data-image="images/zipupdosninfas.webp">Comprar</button>
       </div>
     </article>
 
-    <article class="obra" data-price="1690">
+    <article id="pieza-astros-y-esencias" class="obra" data-price="1690">
       <div class="obra-wall">
         <div class="frame-ornate">
           <img data-src="images/zipupninfas.webp" alt="Zip-up negro, ninfa con sol y luna, dos frascos VJ" class="frame-img" width="965" height="1200" loading="lazy" decoding="async">
@@ -538,20 +510,14 @@
       </div>
       <div class="placard">
         <p class="placard-title">“Astros y Esencias”</p>
-        <p class="placard-meta">Zip-Up, Felpa pesada, forro cepillado</p>
-        <p class="placard-desc">
-          Entre el sol y la luna, la ninfa vela dos frascos gemelos. Día y noche como notas
-          de salida y de fondo.
-        </p>
         <div class="placard-row">
-          <span class="placard-ed">Edición 33</span>
           <span class="placard-price">$1,690 MXN</span>
         </div>
         <button class="placard-cta" data-title="Astros y Esencias" data-meta="Zip-Up &middot; Felpa pesada" data-price="1690" data-image="images/zipupninfas.webp">Comprar</button>
       </div>
     </article>
 
-    <article class="obra" data-price="1750">
+    <article id="pieza-el-concilio-de-las-fragancias" class="obra" data-price="1750">
       <div class="obra-wall">
         <div class="frame-ornate">
           <img data-src="images/zipupdual.webp" alt="Zip-up negro, cuatro figuras barrocas con incensarios" class="frame-img" width="965" height="1200" loading="lazy" decoding="async">
@@ -559,13 +525,7 @@
       </div>
       <div class="placard">
         <p class="placard-title">“El Concilio de las Fragancias”</p>
-        <p class="placard-meta">Zip-Up, Felpa pesada, forro cepillado</p>
-        <p class="placard-desc">
-          Cuatro figuras oficiando un rito de humo e incienso, restauradas al óleo original con
-          desgaste intencional, una pieza que ya parece de museo.
-        </p>
         <div class="placard-row">
-          <span class="placard-ed">Edición 33</span>
           <span class="placard-price">$1,750 MXN</span>
         </div>
         <button class="placard-cta" data-title="El Concilio de las Fragancias" data-meta="Zip-Up &middot; Felpa pesada" data-price="1750" data-image="images/zipupdual.webp">Comprar</button>
@@ -584,7 +544,7 @@
   </div>
 
   <div class="obras-grid obras-grid--single">
-    <article class="obra obra--wide" data-price="1590">
+    <article id="pieza-la-mira" class="obra obra--wide" data-price="1590">
       <div class="obra-wall">
         <div class="frame-ornate">
           <img data-src="images/hoodienegra.webp" alt="Hoodie Vera Joscents, joven con mira de precisión, perfume es poder" class="frame-img" width="993" height="1200" loading="lazy" decoding="async">
@@ -592,13 +552,7 @@
       </div>
       <div class="placard placard--wide">
         <p class="placard-title">“La Mira”</p>
-        <p class="placard-meta">Hoodie, Felpa pesada 420gsm, gorro forrado</p>
-        <p class="placard-desc">
-          Un joven observa el frasco a través de una mira de precisión, el perfume ya no se elige,
-          se apunta. Etiqueta interior: “Del frasco a la tela, la fragancia toma forma.”
-        </p>
         <div class="placard-row">
-          <span class="placard-ed">Edición 33</span>
           <span class="placard-price">$1,590 MXN</span>
         </div>
         <button class="placard-cta" data-title="La Mira" data-meta="Hoodie &middot; Felpa pesada 420gsm" data-price="1590" data-image="images/hoodienegra.webp">Comprar</button>
@@ -608,17 +562,12 @@
 
   <div class="obras-grid obras-grid--single obras-grid--spaced">
 
-    <article class="obra obra--wide" data-price="2700">
+    <article id="pieza-el-sello" class="obra obra--wide" data-price="2700">
       <div class="obra-wall-clean">
         <img id="selloHoodieMainImg" data-src="images/crest-clean/sello-dorado-hoodie.webp" alt="El Sello, hoodie negra, Ouroboros bordado en la espalda" class="gallery-main-img" width="973" height="1200" loading="lazy" decoding="async">
       </div>
       <div class="placard placard--wide">
         <p class="placard-title">“El Sello”</p>
-        <p class="placard-meta">Hoodie, Felpa pesada 450gsm</p>
-        <p class="placard-desc">
-          El Ouroboros bordado en la espalda, en la capucha oscura, el ciclo que se devora y renace,
-          según el color elegido.
-        </p>
 
         <div class="config-field">
           <span class="config-field-label">Variantes: <em id="selloHoodieVariantName">Dorado</em></span>
@@ -650,7 +599,6 @@
         </div>
 
         <div class="placard-row">
-          <span class="placard-ed">Edición 33</span>
           <span class="placard-price" id="selloHoodiePrice">$2,700 MXN</span>
         </div>
         <button class="placard-cta" id="selloHoodieAddBtn" data-title="El Sello (Dorado)" data-meta="Hoodie · Felpa pesada 450gsm" data-price="2700" data-image="images/crest-clean/sello-dorado-hoodie.webp">Comprar</button>
@@ -724,11 +672,6 @@
 
     <div class="config-panel">
       <p class="placard-title">“VJ Elemental”</p>
-      <p class="placard-meta">Camiseta Oversized, Algodón pesado 240gsm</p>
-      <p class="placard-desc">
-        El monograma VJ bordado sobre algodón negro, la pieza fundadora de la colección.
-        Elija el color del hilo y, si lo desea, sume el Uróboros bordado en la espalda.
-      </p>
 
       <div class="config-field">
         <span class="config-field-label">Talla</span>
@@ -788,7 +731,6 @@
 
       <div class="config-buy-bar" id="configBuyBar">
         <div class="placard-row">
-          <span class="placard-ed">Edición 33</span>
           <span class="placard-price" id="configPrice">$1,450 MXN</span>
         </div>
         <button class="placard-cta" id="configAddBtn" disabled>Elige una talla</button>
@@ -845,11 +787,6 @@
 
     <div class="config-panel">
       <p class="placard-title">“VJ Elemental Premium”</p>
-      <p class="placard-meta">Hoodie Heavy Weight, French Terry 450gsm 100% algodón</p>
-      <p class="placard-desc">
-        Monograma “V·J” cursivo bordado al frente, pequeño y tono sobre tono, con etiqueta textil VJ en el bolsillo.
-        Elija la base, el color del hilo y, si lo desea, sume el Ouroboros bordado en la espalda con la misma lógica de color.
-      </p>
 
       <div class="config-field">
         <span class="config-field-label">Talla</span>
@@ -890,7 +827,6 @@
 
       <div class="config-buy-bar" id="premiumBuyBar">
         <div class="placard-row">
-          <span class="placard-ed">Edición 33</span>
           <span class="placard-price" id="premiumPrice">$2,450 MXN</span>
         </div>
         <button class="placard-cta" id="premiumAddBtn" disabled>Elige una talla</button>
@@ -935,7 +871,6 @@
 
     <div class="config-panel">
       <p class="placard-title">“VJ Escudo Heráldico”</p>
-      <p class="placard-meta">Bordado heráldico, confección personalizable</p>
 
       <div class="config-field">
         <span class="config-field-label">Variantes: <em id="escudoVariantName">Negra</em></span>
@@ -990,6 +925,7 @@
       </div>
     </div>
     <nav class="footer-colophon" aria-label="Pie de página">
+      <a href="#" data-tab="todo">Todo</a>
       <a href="#" data-tab="camisetas">Camisetas</a>
       <a href="#" data-tab="sudaderas">Sudaderas</a>
       <a href="#" data-tab="zip">Zip-Ups</a>
@@ -1008,7 +944,11 @@
 
 <div class="size-modal" id="sizeModal" role="dialog" aria-modal="true" aria-labelledby="sizeModalTitle" aria-hidden="true">
   <button class="size-modal-close" id="sizeModalClose" aria-label="Cerrar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <figure class="size-modal-figure" id="sizeModalFig" hidden>
+    <img id="sizeModalImg" src="images/bfronty.webp" alt="" width="1200" height="1049" loading="lazy" decoding="async">
+  </figure>
   <h3 class="size-modal-title" id="sizeModalTitle">Pieza</h3>
+  <p class="size-modal-price" id="sizeModalPrice"></p>
   <p class="size-legend">Talla</p>
   <div class="size-options" id="sizeOptions">
     <button class="size-btn" type="button" data-size="S">S</button>
@@ -1021,6 +961,7 @@
     <button class="size-buy" id="sizeBuyNow" type="button" disabled>Comprar por WhatsApp</button>
     <button class="size-confirm" id="sizeConfirm" type="button" disabled>Añadir al pedido</button>
   </div>
+  <a href="#" class="size-modal-more" id="sizeModalMore" data-tab="camisetas" data-pieza="" hidden>Ver la pieza completa</a>
 </div>
 
 <!-- ================= REGISTRO DE ADQUISICIONES (CARRITO) ================= -->

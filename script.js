@@ -265,6 +265,10 @@ const sizeConfirmBtn = document.getElementById('sizeConfirm');
 const sizeModalCloseBtn = document.getElementById('sizeModalClose');
 const sizeHintEl = document.getElementById('sizeHint');
 const sizeBuyNowBtn = document.getElementById('sizeBuyNow');
+const sizeModalFig = document.getElementById('sizeModalFig');
+const sizeModalImg = document.getElementById('sizeModalImg');
+const sizeModalPrice = document.getElementById('sizeModalPrice');
+const sizeModalMore = document.getElementById('sizeModalMore');
 
 let pendingItem = null;
 let pendingBtn = null;
@@ -279,6 +283,17 @@ function openSizeModal(data, btn) {
   sizeConfirmBtn.disabled = true;
   if (sizeBuyNowBtn) sizeBuyNowBtn.disabled = true;
   sizeHintEl.textContent = 'Elige una talla para continuar.';
+
+  // la ficha rápida: foto, precio y, desde Todo, el enlace a la pieza completa
+  if (sizeModalPrice) sizeModalPrice.textContent = data.price ? formatMXN(parseFloat(data.price)) : '';
+  if (sizeModalImg && sizeModalFig) {
+    if (data.image) { sizeModalImg.src = data.image; sizeModalImg.alt = data.title || ''; sizeModalFig.hidden = false; }
+    else sizeModalFig.hidden = true;
+  }
+  if (sizeModalMore) {
+    if (data.pieza) { sizeModalMore.dataset.tab = data.sala; sizeModalMore.dataset.pieza = data.pieza; sizeModalMore.hidden = false; }
+    else sizeModalMore.hidden = true;
+  }
 
   sizeModal.classList.add('is-open');
   sizeOverlay.classList.add('is-open');
@@ -891,51 +906,6 @@ renderCart();
   if (y) y.textContent = new Date().getFullYear();
 })();
 
-// --- Vídeo de la rotonda: entra después del primer pintado ---
-// El póster (55 KB) ya está precargado, así que el hero se ve completo
-// de inmediato; el vídeo (2.5 MB) no compite con el render inicial y
-// nunca se descarga en conexiones medidas o lentas.
-(function () {
-  const video = document.querySelector('.rotonda-canvas video');
-  if (!video || !video.dataset.src) return;
-
-  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  // sólo se omite en conexiones realmente limitadas: la carga ya es diferida,
-  // así que en 3G entra después del render sin estorbar al primer pintado
-  const restringida = conn && (conn.saveData === true ||
-                               /^(slow-)?2g$/.test(conn.effectiveType || ''));
-  const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (restringida || sinMovimiento) return;   // se queda el póster
-
-  function cargar() {
-    if (video.dataset.cargado === '1') return;
-    video.dataset.cargado = '1';
-    const source = document.createElement('source');
-    source.src = video.dataset.src;
-    source.type = 'video/mp4';
-    video.appendChild(source);
-    video.preload = 'auto';
-    video.load();
-    const p = video.play();
-    if (p && p.catch) p.catch(() => {});   // autoplay bloqueado: queda el póster
-  }
-
-  // al volver a la pestaña el navegador deja el vídeo pausado
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' &&
-        video.dataset.cargado === '1' && video.paused) {
-      const p = video.play();
-      if (p && p.catch) p.catch(() => {});
-    }
-  });
-
-  const arrancar = () => (window.requestIdleCallback
-    ? requestIdleCallback(cargar, { timeout: 2000 })
-    : setTimeout(cargar, 600));
-
-  if (document.readyState === 'complete') arrancar();
-  else window.addEventListener('load', arrancar, { once: true });
-})();
 
 // ============================================================
 // HIDRATACIÓN DE SALAS
@@ -1007,13 +977,54 @@ document.querySelectorAll('.config-field').forEach((field) => {
   panels.forEach((panel) => io.observe(panel));
 })();
 
-// --- La barra de compra fija aparece cuando el hero ya salió de la vista ---
+
+// --- Todo: filtro por tipo de prenda ---
 (function () {
-  const bar = document.querySelector('.buy-bar');
-  const hero = document.getElementById('rotonda');
-  if (!bar || !hero) return;
-  if (!window.IntersectionObserver) { bar.classList.add('is-shown'); return; }
-  new IntersectionObserver(([e]) => {
-    bar.classList.toggle('is-shown', !e.isIntersecting);
-  }, { threshold: 0 }).observe(hero);
+  const bar = document.querySelector('.filtros');
+  if (!bar) return;
+  const items = Array.from(document.querySelectorAll('.todo-item'));
+  const count = document.querySelector('.todo-count');
+  bar.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filtro');
+    if (!btn) return;
+    const filtro = btn.dataset.filtro;
+    bar.querySelectorAll('.filtro').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+    let n = 0;
+    items.forEach((it) => {
+      const show = filtro === 'todo' || it.dataset.cat === filtro;
+      it.hidden = !show;
+      if (show) n += 1;
+    });
+    if (count) count.textContent = n === 1 ? '1 pieza' : `${n} piezas`;
+  });
 })();
+
+// --- Desde Todo: abre la sala y baja directo a la pieza ---
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('[data-pieza]');
+  if (!link) return;
+  const id = link.dataset.pieza;
+  // showTab sube al inicio de la sala; un instante después bajamos a la pieza
+  setTimeout(() => {
+    const pieza = document.getElementById(id);
+    if (pieza) pieza.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 120);
+});
+
+// --- Todo: al tocar una prenda se abre su ficha rápida (precio, talla, comprar) ---
+document.querySelectorAll('.todo-link').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const pieza = document.getElementById(btn.dataset.quick);
+    const cta = pieza && pieza.querySelector('.placard-cta');
+    if (!cta) return;
+    openSizeModal({
+      title: cta.dataset.title,
+      meta: cta.dataset.meta,
+      price: cta.dataset.price,
+      image: cta.dataset.image,
+      pieza: btn.dataset.quick,
+      sala: btn.dataset.sala,
+    }, null);
+  });
+});
+if (sizeModalMore) sizeModalMore.addEventListener('click', () => closeSizeModal());
